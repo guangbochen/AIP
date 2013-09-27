@@ -1,0 +1,141 @@
+/*-------------------- Global CSS -----------------*/
+.body-wrapper
+{
+	min-height: 600px;
+}
+/* css for the header */
+.navbar-nav>li>a:hover {
+    background-color: #2C2C2C !important;
+    color: #FFFFFF !important;
+}
+.navbar-right {
+	min-width:300px;
+}
+
+.form-control {
+	width: 200px;
+	margin:5px;
+}
+
+/* css for the header */
+.login_button {
+	margin-top:37px;
+}
+
+.container {
+    max-width: 1024px;
+}
+.myContainer {
+    margin-top: 30px;
+}
+.modal-dialog {
+    width: 400px;
+}
+
+.filter {
+	max-width:400px;
+}
+
+.selection {
+	height: 34px;
+	width: 200px;
+	height: 34px;
+	padding: 6px 12px;
+	font-size: 14px;
+	line-height: 1.428571429;
+	color: #555555;
+	vertical-align: middle;
+	background-color: #ffffff;
+	border: 1px solid #cccccc;
+	border-radius: 4px;
+	-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+	box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+	-webkit-transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+	transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+	margin-right:5px;
+}
+
+.myQuantity {
+	max-width:80px;
+	height: 34px;
+	padding: 6px 6px;
+	font-size: 14px;
+	line-height: 1.428571429;
+	color: #555;
+	vertical-align: middle;
+	background-color: #fff;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	-webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,0.075);
+	box-shadow: inset 0 1px 1px rgba(0,0,0,0.075);
+	-webkit-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+	transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+}
+
+.footer {
+	max-width:1024px;
+	min-height:100px;
+}
+
+
+
+
+/* css for the purchase */
+.purchaseTable {
+	max-width:500px;
+}
+
+.purchase-cancel {
+	margin-top:-62px;
+}
+
+
+.topPadding {
+	padding-top:200px;
+}
+.notice {
+	padding:20px;
+}
+
+/* css for the admin */
+.searchButton
+{
+	margin-top:30px;
+	margin-left:5px;
+}
+
+.mySpace
+{
+	margin-top:120px;
+	width:100px;
+}
+
+.admin-update
+{
+	margin-left: 850px;
+	margin-top: -75px;
+}
+
+/* css for the product page */
+.p_price
+{
+	padding:0px 20px 0px 5px;
+	color:#CC0101;
+	font-size: 18px;
+}
+
+.p_desc
+{
+	min-height: 40px;
+	max-height: 40px;
+}
+
+.p_filter
+{
+	min-height: 50px;
+}
+.p_cart
+{
+	margin-top:-60px;
+	margin-right:0px;
+}

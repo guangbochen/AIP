@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-modules id="moduleCoreId" project-version="1.5.0">
+    <wb-module deploy-name="fc_ejb3">
+        <wb-resource deploy-path="/" source-path="/ejbModule" tag="defaultRootSource"/>
+        <property name="java-output-path" value="/fc_ejb3/build/classes"/>
+        <property name="ClientProject" value="fc_ejb3Client"/>
+        <property name="ClientJARURI" value="fc_ejb3Client.jar"/>
+    </wb-module>
+</project-modules>
