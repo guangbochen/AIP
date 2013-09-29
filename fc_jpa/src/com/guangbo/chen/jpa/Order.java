@@ -47,7 +47,7 @@ public class Order implements Serializable{
 	 */
 	public Order(String title, String surname, String givenName, String email,
 			String unitNumber, String street, String state, String suburb,
-			String postCode, String country, String paymentDetails, Double grandTotal) 
+			String postCode, String country, String paymentDetails) 
 	{
 		super();
 		this.title = title;
@@ -61,7 +61,6 @@ public class Order implements Serializable{
 		this.postCode = postCode;
 		this.country = country;
 		this.paymentDetails = paymentDetails;
-		this.grandTotal = grandTotal;
 	}
 
 	/**

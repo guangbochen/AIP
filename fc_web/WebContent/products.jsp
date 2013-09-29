@@ -62,12 +62,12 @@
 	        		<p class="p_desc">${p.description}</p>
 	        		<form method="POST" action="products?action=order">
 	        			<strong class="p_price">$ ${p.price}</strong>
-			            <input type="hidden" name="id" value="${product.id }" />
-			            <input type="hidden" name="category" value="${product.category }" />
-			            <input type="hidden" name="code" value="${product.code }" />
-			            <input type="hidden" name="description" value="${product.description }" />
-			            <input type="hidden" name="price" value="${product.price }" />
-			            <input type="hidden" name="quantity" value="1"/>
+			            <input type="hidden" name="id" value="${p.id }" />
+			            <input type="hidden" name="category" value="${p.category }" />
+			            <input type="hidden" name="code" value="${p.code }" />
+			            <input type="hidden" name="description" value="${p.description }" />
+			            <input type="hidden" name="price" value="${p.price }" />
+			            <input type="hidden" name="quantity" value="1" />
 			            <input type="submit" value="Add to cart" class="btn btn-danger addButton"/>
 	        		</form>
       			</div>

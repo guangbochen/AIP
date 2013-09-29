@@ -15,11 +15,9 @@
 
 
     <div class="container">
-    
-    	<!-- shows the navigation title -->
+    	<!-- shows the navi title -->
         <p><a href="index">Home</a> >> Check My Shopping cart</p>
         <hr/>
-        <p>${test }</p>
         <!-- displays the orders -->
         <table class="table table-hover">
 	        <tr class="success">
@@ -31,22 +29,22 @@
 	            <th></th>
 	        </tr>
 			<!-- print out customer's order -->
-	      	<c:forEach var="order" items="${shoppingCart }">
+	      	<c:forEach var="ol" items="${shoppingCart }">
 	        <tr>
-	            <td>${order.product.category }</td>
-	            <td>${order.product.code }</td>
-	            <td>${order.product.description }</td>
+	            <td>${ol.product.category }</td>
+	            <td>${ol.product.code }</td>
+	            <td>${ol.product.description }</td>
 	            <td>
 			        <form method="POST" action="orders?action=update">
-		            <input type="hidden" name="pid" value="${order.product.id }" /> 
-		            <input type="input" name="quantity" value="${order.quantity }" class="myQuantity"/> 
+		            <input type="hidden" name="pid" value="${ol.product.id }" /> 
+		            <input type="input" name="quantity" value="${ol.quantity }" class="myQuantity"/> 
 		            <input type="submit" value="Update" class="btn btn-warning"/> 
 	            	</form>
 	            </td>
-	            <td>$ ${order.lineTotal }</td>
+	            <td>$ ${ol.lineTotal }</td>
 	            <td>
 			        <form method="POST" action="orders?action=delete">
-		            <input type="hidden" name="pid" value="${order.productId }" /> 
+		            <input type="hidden" name="pid" value="${ol.product.id }" /> 
 		            <center><input type="submit" value="Delete" class="btn btn-danger"/></center>
 	            	</form>
 	            </td>

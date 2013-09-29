@@ -2,6 +2,7 @@ package com.guangbo.chen.servlet;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -18,65 +19,156 @@ import com.guangbo.chen.jpa.Product;
  */
 public class OrderServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private double grandTotal;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doPost(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		ArrayList<Orderline> orderList= new ArrayList<Orderline>();
-		//get ordered product from http session
 		HttpSession sess = request.getSession();
 		orderList = (ArrayList<Orderline>) sess.getAttribute("shoppingCart");
-        //check HTTP servlet request
+		
+        //check action from orders page
 		if(request.getParameter("action") != null)
 		{
 			if(request.getParameter("action").equals("update"))
 			{
 				//update product quantity
-//				updateQuantity(request, ops);
+				updateQuantity(request, orderList);
 			}
 			else if(request.getParameter("action").equals("delete"))
 			{
 				//remove delete order
-//				removeOrder(request, ops);
+				removeOrder(request, orderList);
 			}
 			else if(request.getParameter("action").equals("cancel"))
 			{
 				//cancel the entire order
-//				sess.setAttribute("shoppingCart", null);
-//				ops = null;
+				sess.setAttribute("shoppingCart", null);
+				orderList = null;
 			}
 			else if(request.getParameter("action").equals("purchase"))
 			{
 				//purchase the order
-//				purchaseOrder(request, response, ops);
+				purchaseOrder(request, response, orderList);
 			}
 		}
 		
 		//update the grand Total
-//		if( ops!=null )
-//		{
-//			OrderedProduct op = new OrderedProduct();
-//			double grandTotal = op.getGrandTotal(ops);
-//			request.setAttribute("grandTotal", grandTotal);
-//		}
-//		else
-//		{
-//			//if has no orders set grandTotal as 0
-//			double grandTotal = 0.0;
-//			request.setAttribute("grandTotal", grandTotal);
-//		}
-		
-//		Product p = new Product(2,"catege1", "1", "balahbalah", 20.0);
-//		Orderline ol = new Orderline(p,2,20.0*2);
-//		orderList.add(ol);
+		double grandTotal = calGrandTotal(orderList);
+		request.setAttribute("grandTotal", grandTotal);
         request.setAttribute("shoppingCart", orderList);
-        request.setAttribute("test", "test");
-		//forward OrderServlet view to the orders jsp page
+        
+		//forward request to the orders page
         RequestDispatcher view = request.getRequestDispatcher("orders.jsp");
         view.forward(request, response);
 		
+	}
+	
+	/**
+	 * this method updates product quantity upon the user input
+	 * @param request, http request
+	 * @param ops, ArrayList contains ordered products
+	 */
+	private void updateQuantity(HttpServletRequest request, ArrayList<Orderline> orderList)
+	{
+		try
+		{
+			int pid = Integer.parseInt(request.getParameter("pid"));
+			int quantity = Integer.parseInt(request.getParameter("quantity"));
+			for(Orderline ol : orderList)
+			{
+				//update quantity & line total of the order upon product id
+				if(ol.getProduct().getId() == pid && quantity >0)
+				{
+					double price = ol.getProduct().getPrice();
+					ol.setQuantity(quantity);
+					ol.setLineTotal(price*quantity);
+				}
+			}
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		//update the session 
+		HttpSession sess = request.getSession();
+		sess.setAttribute("shoppingCart", orderList);
+	}
+	
+	/**
+	 * this method remove order upon the user request
+	 * @param request, http request
+	 * @param ops, ArrayList contains ordered products
+	 */
+	private synchronized void removeOrder(HttpServletRequest request, ArrayList<Orderline> orderList)
+	{
+		try
+		{
+			int pid = Integer.parseInt(request.getParameter("pid"));
+			for (Iterator<Orderline> it = orderList.iterator(); it.hasNext(); )
+			{
+				Orderline op = (Orderline) it.next();  
+				if(op.getProduct().getId() == pid )
+				{
+					it.remove();
+				}
+			}
+			//update the shopping cart session 
+			HttpSession sess = request.getSession();
+			sess.setAttribute("shoppingCart", orderList);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		
+	}
+	
+	/**
+	 * this method validate purchasing order action, if is not empty then purchasing the order
+	 * @param request
+	 * @param response
+	 * @param ops
+	 */
+	private void purchaseOrder(HttpServletRequest request, HttpServletResponse response, ArrayList<Orderline> orderList)
+	{
+		if(orderList == null || orderList.isEmpty())
+		{
+			//set empty order message
+			request.setAttribute("emptyOrder", "Please select at least one product to purchase.");
+		}
+		else
+		{
+	        RequestDispatcher view = request.getRequestDispatcher("/purchase");
+	        try {
+				view.forward(request, response);
+			} catch (ServletException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	/**
+	 * this method calculates the grand total price of the order list
+	 * @param orderList, Arraylist of orderline
+	 * @return double grandTotal
+	 */
+	private double calGrandTotal(ArrayList<Orderline> orderList) {
+		double grandTotal = 0.0;
+		if(orderList != null)
+		{
+			for(Orderline ol : orderList)
+			{
+				grandTotal += ol.getLineTotal();
+			}
+		}
+		return grandTotal;
 	}
 
 }

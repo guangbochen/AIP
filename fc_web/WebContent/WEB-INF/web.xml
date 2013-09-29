@@ -34,4 +34,14 @@
     <servlet-name>OrderServlet</servlet-name>
     <url-pattern>/orders</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>PurchaseServlet</display-name>
+    <servlet-name>PurchaseServlet</servlet-name>
+    <servlet-class>com.guangbo.chen.servlet.PurchaseServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>PurchaseServlet</servlet-name>
+    <url-pattern>/purchase</url-pattern>
+  </servlet-mapping>
 </web-app>
