@@ -1,8 +1,8 @@
 //set focus for login 
-if ($("#username").val() == "")
-	$("#username").focus();
-else if ($("#password").val() == "")
-	$("#password").focus();
+//if ($("#username").val() == "")
+//	$("#username").focus();
+//else if ($("#password").val() == "")
+//	$("#password").focus();
 
 //set focus for fill purching details
 if ($("#title").val() == "")

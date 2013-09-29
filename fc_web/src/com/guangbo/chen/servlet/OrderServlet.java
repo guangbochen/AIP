@@ -21,11 +21,14 @@ public class OrderServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private double grandTotal;
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) 
+			throws ServletException, IOException {
 		doPost(request, response);
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	@SuppressWarnings("unchecked")
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) 
+			throws ServletException, IOException {
 		
 		ArrayList<Orderline> orderList= new ArrayList<Orderline>();
 		HttpSession sess = request.getSession();
@@ -104,7 +107,7 @@ public class OrderServlet extends HttpServlet {
 	 * @param request, http request
 	 * @param ops, ArrayList contains ordered products
 	 */
-	private synchronized void removeOrder(HttpServletRequest request, ArrayList<Orderline> orderList)
+	private synchronized void removeOrder(HttpServletRequest request,ArrayList<Orderline> orderList)
 	{
 		try
 		{
@@ -134,7 +137,8 @@ public class OrderServlet extends HttpServlet {
 	 * @param response
 	 * @param ops
 	 */
-	private void purchaseOrder(HttpServletRequest request, HttpServletResponse response, ArrayList<Orderline> orderList)
+	private void purchaseOrder(HttpServletRequest request, HttpServletResponse response, 
+			ArrayList<Orderline> orderList)
 	{
 		if(orderList == null || orderList.isEmpty())
 		{

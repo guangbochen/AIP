@@ -18,6 +18,9 @@ public class ProductEjbDao implements ProductDAO, ProductDAOLocal {
 	@PersistenceContext
 	private EntityManager em;
 
+	/**
+	 * default constructor
+	 */
     public ProductEjbDao() {
     	
     }

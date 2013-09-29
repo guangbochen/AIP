@@ -1,9 +1,7 @@
 package com.guangbo.chen.servlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
-
 import javax.ejb.EJB;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,12 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.xml.ws.RespectBinding;
-
 import com.guangbo.chen.ejb.ProductDAO;
 import com.guangbo.chen.jpa.Orderline;
 import com.guangbo.chen.jpa.Product;
-import com.sun.tools.javac.util.List;
 
 public class ProductServlet extends HttpServlet {
 	@EJB (name="productEjb",mappedName="ejb/product")
@@ -93,18 +88,25 @@ public class ProductServlet extends HttpServlet {
 	 * @param response, servlet response
 	 */
 	private void findAllProductsByCategory(HttpServletRequest request, HttpServletResponse response) {
-		String category = request.getParameter("category");
-		if(category.equals("All"))
+		try
 		{
-			noOfRecords = pdao.findAll().size();
-			productList = (ArrayList<Product>) pdao.findAllByPagination((page-1)*recordsPerPage,recordsPerPage);
+			String category = request.getParameter("category");
+			if(category.equals("All"))
+			{
+				noOfRecords = pdao.findAll().size();
+				productList = (ArrayList<Product>) pdao.findAllByPagination((page-1)*recordsPerPage,recordsPerPage);
+			}
+			else
+			{
+				noOfRecords = pdao.findAllByCategory(category).size();
+				productList = (ArrayList<Product>) pdao.findAllCategoryByPagination(category,(page-1)*recordsPerPage,recordsPerPage);
+				//return list of products upon category
+		        request.setAttribute("category", category);
+			}
 		}
-		else
+		catch(NullPointerException e)
 		{
-			noOfRecords = pdao.findAllByCategory(category).size();
-			productList = (ArrayList<Product>) pdao.findAllCategoryByPagination(category,(page-1)*recordsPerPage,recordsPerPage);
-			//return list of products upon category
-	        request.setAttribute("category", category);
+			e.printStackTrace();
 		}
 	}
 	
