@@ -110,13 +110,14 @@ public class Orderline implements Serializable {
 	 */
 	@Column(name = "lineTotal", unique = true, nullable = false, columnDefinition = "Double(7,2)")
 	public double getLineTotal() {
-		return Math.round(lineTotal*100.0)/100.0;
+		return lineTotal;
 	}
 	
 	/**
 	 * @param lineTotal the lineTotal to set
 	 */
 	public void setLineTotal(double lineTotal) {
+		lineTotal = Math.round(lineTotal*100.0)/100.0;
 		this.lineTotal = lineTotal;
 	}
 

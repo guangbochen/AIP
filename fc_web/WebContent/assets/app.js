@@ -32,8 +32,8 @@ else if ($("#card").val() == "")
 //set focus for view orders form
 if ($("#orderNumber").val() == "")
 	$("#orderNumber").focus();
-else if ($("#surname").val() == "")
-	$("#surname").focus();
+else if ($("#orderSurname").val() == "")
+	$("#orderSurname").focus();
 
 //set focus for admin searching order form
 else if ($("#searchOrder").val() == "")

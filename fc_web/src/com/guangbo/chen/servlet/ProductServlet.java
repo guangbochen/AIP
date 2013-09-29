@@ -32,7 +32,6 @@ public class ProductServlet extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("hellow");
 		//initialize variables
 		productList = null;
 		page =1;
@@ -62,7 +61,7 @@ public class ProductServlet extends HttpServlet {
 			{
 				//add customer order to the shopping cart and forward to the order page
 				addOrderToShopingCart(request);
-		        RequestDispatcher view = request.getRequestDispatcher("orders");
+		        RequestDispatcher view = request.getRequestDispatcher("/orders");
 		        view.forward(request, response);
 			}
 		}
@@ -133,7 +132,6 @@ public class ProductServlet extends HttpServlet {
 				Product p = new Product(pid,category, code, description, price);
 				Orderline ol = new Orderline(p,quantity,price*quantity);
 				orderList.add(ol);
-				sess.setAttribute("shoppingCart", orderList);	
 			}
 			else
 			{
@@ -162,11 +160,6 @@ public class ProductServlet extends HttpServlet {
 			}
 			//update the HTTP shoppingCart session 
 			sess.setAttribute("shoppingCart", orderList);	
-		for(Orderline p: orderList)
-		{
-			System.out.println(p.getProduct().getCode());
-			
-		}
 		}
 		catch(Exception e)
 		{

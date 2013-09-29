@@ -10,5 +10,10 @@
 		<class>com.guangbo.chen.jpa.Product</class>
 		<class>com.guangbo.chen.jpa.Orderline</class>
 		<class>com.guangbo.chen.jpa.Order</class>
+		<properties>
+	        <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"/>
+	        <property name="hibernate.showSql" value="false"/>
+			<property name="hibernate.transaction.jta.platform" value="org.hibernate.service.jta.platform.internal.WeblogicJtaPlatform"/>
+    	</properties>
 	</persistence-unit>
 </persistence>
