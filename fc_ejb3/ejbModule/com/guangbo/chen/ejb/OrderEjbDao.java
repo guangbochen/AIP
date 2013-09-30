@@ -47,12 +47,13 @@ public class OrderEjbDao implements OrderDAO, OrderDAOLocal {
 		try
 		{
 			//insert customer order and associated orderlines into the database
-			System.out.println("------------------------------- " +getUniqueOrderNum());
-			order.setOrderNumber(getUniqueOrderNum());
+			order.setOrderNumber(generateOrderNum());
+			order.setStatus(defaultStatus);
 			em.persist(order);
 			for(Orderline ol : orderList)
 			{
 				ol.setOrder(order);
+				ol.setProduct(ol.getProduct());
 				order.getOrderLines().add(ol);
 				em.persist(ol);
 			}
@@ -81,17 +82,18 @@ public class OrderEjbDao implements OrderDAO, OrderDAOLocal {
 	 */
 	private String generateOrderNum()
 	{
-		NumberFormat nf = new DecimalFormat("0000");
-		int id = 0;
+		int orderId = 0;
 		try 
 		{
-			id = (Integer) em.createNamedQuery("order.getUniqueNum").getSingleResult();
+			Integer id = (Integer) em.createNamedQuery("order.getUniqueNum").getSingleResult();
 			//if the database is empty set first unique order number as 1
-			if(id == 0)
-				id = 1;
-			//converting int to string and add prefix to it
-			String orderId = nf.format(id);
-			orderNumber = prefixOfUniqueId + orderId;
+			if(id == null)
+				orderId = 1;
+			else
+				orderId =  id.intValue()+1;
+			//converting int id to string and add prefix to order number
+			String uniqueId = String.format("%04d", orderId);
+			orderNumber = prefixOfUniqueId + uniqueId;
 		} 
 		catch (Exception e) 
 		{

@@ -16,13 +16,26 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="orderLines")
+@Table(name="orderlines")
 public class Orderline implements Serializable {
 
+	@Id
+	@GeneratedValue(strategy=IDENTITY)
+	@Column(name = "id", unique = true, nullable = false)
 	private int id;
+	
+	@OneToOne(fetch=FetchType.LAZY, cascade=CascadeType.MERGE)
+	@JoinColumn(name="product_id", nullable = false)
 	private Product product;
+	
+	@ManyToOne(fetch = FetchType.LAZY, cascade=CascadeType.ALL)
+	@JoinColumn(name = "order_id", nullable = false)
 	private Order order;
+	
+	@Column(name = "quantity", unique = true, nullable = false, columnDefinition = "INT(10)")
 	private int quantity;
+	
+	@Column(name = "lineTotal", unique = true, nullable = false, columnDefinition = "Double(7,2)")
 	private double lineTotal;
 	
 	/**
@@ -45,9 +58,6 @@ public class Orderline implements Serializable {
 	/**
 	 * @return the id
 	 */
-	@Id
-	@GeneratedValue(strategy=IDENTITY)
-	@Column(name = "id", unique = true, nullable = false)
 	public int getId() {
 		return id;
 	}
@@ -61,8 +71,6 @@ public class Orderline implements Serializable {
 	/**
 	 * @return the product
 	 */
-	@OneToOne(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
-	@JoinColumn(name="product_id", nullable = false)
 	public Product getProduct() {
 		return product;
 	}
@@ -77,8 +85,6 @@ public class Orderline implements Serializable {
 	/**
 	 * @return the order
 	 */
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "order_id", nullable = false)
 	public Order getOrder() {
 		return order;
 	}
@@ -93,7 +99,6 @@ public class Orderline implements Serializable {
 	/**
 	 * @return the quantity
 	 */
-	@Column(name = "quantity", unique = true, nullable = false, columnDefinition = "INT(10)")
 	public int getQuantity() {
 		return quantity;
 	}
@@ -108,7 +113,6 @@ public class Orderline implements Serializable {
 	/**
 	 * @return the lineTotal
 	 */
-	@Column(name = "lineTotal", unique = true, nullable = false, columnDefinition = "Double(7,2)")
 	public double getLineTotal() {
 		return lineTotal;
 	}
