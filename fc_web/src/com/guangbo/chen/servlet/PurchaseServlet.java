@@ -23,9 +23,6 @@ public class PurchaseServlet extends HttpServlet
 {
 	@EJB (name="OrderEjb",mappedName="ejb/order")
 	private OrderDAO odao; 
-	
-	private static final long serialVersionUID = 1L;
-       
 
 	/**
 	 * this method calls doPost method
@@ -54,7 +51,7 @@ public class PurchaseServlet extends HttpServlet
 			else if(request.getParameter("action").equals("cancle"))
 			{
 				//cancel to purchasing the order
-		        RequestDispatcher view = request.getRequestDispatcher("/orders");
+		        RequestDispatcher view = request.getRequestDispatcher("orders");
 		        view.forward(request, response);
 			}
 			else if(request.getParameter("action").equals("process"))
@@ -63,7 +60,6 @@ public class PurchaseServlet extends HttpServlet
 				proceedOrder(request,response);
 			}
 		}
-		
         RequestDispatcher view = request.getRequestDispatcher("purchase.jsp");
         view.forward(request, response);
 		
@@ -144,7 +140,7 @@ public class PurchaseServlet extends HttpServlet
 			}	
 			else
 			{
-				//forward to confirm purchase as default page if repeat the action with empty order
+				//forward to error page if repeat the purchase action with empty order
 		        RequestDispatcher view = request.getRequestDispatcher("error.jsp");
 		        view.forward(request, response);
 			}

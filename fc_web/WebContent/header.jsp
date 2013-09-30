@@ -3,7 +3,7 @@
    <div class="navbar navbar-default">
      <div class="container">
        <div class="navbar-header"> <br>
-           <a class="navbar-brand" href="index">FC Sportsware Pty. Ltd.</a>
+           <a class="navbar-brand" href="index"><span class="glyphicon glyphicon-globe"></span> FC Sportsware Pty. Ltd.</a>
        </div>
            <ul class="nav navbar-nav"> <br>
                <li><a href="products">View Products</a></li>

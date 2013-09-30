@@ -1,6 +1,7 @@
 package com.guangbo.chen.ejb;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.ejb.Remote;
 
@@ -15,6 +16,7 @@ public interface OrderDAO {
 	
 	//searching and getting method
 	public String getUniqueOrderNum();
-	public double getGrandTotal(ArrayList<Orderline> orderList);
+	public double getGrandTotal(List<Orderline> ols);
+	public Order findOrderByOrderNumAndSurname(String orderNum, String surname);
 
 }

@@ -13,14 +13,14 @@
 <!-- import page header -->
 <%@ include file="header.jsp" %>
 
-
-    <div class="container">
+    <div class="container body-wrapper">
     	<!-- shows the navi title -->
         <p><a href="index">Home</a> >> Check My Shopping cart</p>
         <hr/>
         <!-- displays the orders -->
         <table class="table table-hover">
 	        <tr class="success">
+	            <th>Product</th>
 	            <th>Category</th>
 	            <th>Code</th>
 	            <th>Description</th>
@@ -31,6 +31,8 @@
 			<!-- print out customer's order -->
 	      	<c:forEach var="ol" items="${shoppingCart }">
 	        <tr>
+      			<td><img data-src="holder.js/300x200" alt=" img 50*50" 
+      			src="assets/img/products/${ol.product.category}${ol.product.code}.jpg" style="width: 80px; height: 80px;"></td>
 	            <td>${ol.product.category }</td>
 	            <td>${ol.product.code }</td>
 	            <td>${ol.product.description }</td>

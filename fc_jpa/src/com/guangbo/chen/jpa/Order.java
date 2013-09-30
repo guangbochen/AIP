@@ -4,6 +4,7 @@ import static javax.persistence.GenerationType.IDENTITY;
 
 import java.io.Serializable;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -18,7 +19,8 @@ import javax.persistence.UniqueConstraint;
 import javax.persistence.NamedQuery;
 
 @NamedQueries({
-	@NamedQuery(name = "order.getUniqueNum", query = "Select MAX(o.id) From Order o")
+	@NamedQuery(name = "order.getUniqueNum", query = "Select MAX(o.id) From Order o"),
+	@NamedQuery(name = "order.viewOrder", query = "Select o From Order o Where o.orderNumber Like ?1 And o.surname Like ?2")
 })
 @Entity
 @Table(name="orders", uniqueConstraints = {
@@ -39,7 +41,7 @@ public class Order implements Serializable{
 	private String country;
 	private String paymentDetails;
 	private String status;
-	private Set<Orderline> orderlines = new HashSet<Orderline>(0);
+	private List<Orderline> orderlines;
 	
 	/**
 	 * order constructor
@@ -283,15 +285,15 @@ public class Order implements Serializable{
 	/**
 	 * @return the list
 	 */
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "order")
-	public Set<Orderline> getOrderLines() {
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "order")
+	public List<Orderline> getOrderLines() {
 		return orderlines;
 	}
 
 	/**
 	 * @param list the list to set
 	 */
-	public void setOrderLines(Set<Orderline> orderline) {
+	public void setOrderLines(List<Orderline> orderline) {
 		this.orderlines = orderline;
 	}
 

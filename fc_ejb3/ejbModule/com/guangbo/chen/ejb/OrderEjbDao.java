@@ -1,8 +1,7 @@
 package com.guangbo.chen.ejb;
 
-import java.text.DecimalFormat;
-import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -25,36 +24,22 @@ public class OrderEjbDao implements OrderDAO, OrderDAOLocal {
 	/**
 	 * default constructor
 	 */
-    public OrderEjbDao() {
+    public OrderEjbDao() { 
     	
     }
 
 	@Override
-	public double getGrandTotal(ArrayList<Orderline> orderList) {
-		double grandTotal = 0.0;
-		if(orderList != null)
-		{
-			for(Orderline ol : orderList)
-			{
-				grandTotal += ol.getLineTotal();
-			}
-		}
-		return grandTotal;
-	}
-
-	@Override
-	public void addOrder(ArrayList<Orderline> orderList, Order order) {
+	public void addOrder(ArrayList<Orderline> orderlines, Order order) {
 		try
 		{
 			//insert customer order and associated orderlines into the database
 			order.setOrderNumber(generateOrderNum());
 			order.setStatus(defaultStatus);
+			order.setOrderLines(orderlines);
 			em.persist(order);
-			for(Orderline ol : orderList)
+			for(Orderline ol : orderlines)
 			{
 				ol.setOrder(order);
-				ol.setProduct(ol.getProduct());
-				order.getOrderLines().add(ol);
 				em.persist(ol);
 			}
 		}
@@ -99,8 +84,43 @@ public class OrderEjbDao implements OrderDAO, OrderDAOLocal {
 		{
 			e.printStackTrace();
 		}
-		
 		return orderNumber;
 	}
 
+	@Override
+	public Order findOrderByOrderNumAndSurname(String orderNum, String surname) {
+		Order order = new Order();
+		try {
+			order = (Order) em.createNamedQuery("order.viewOrder")
+					.setParameter(1, orderNum)
+					.setParameter(2, surname)
+					.getSingleResult();
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		finally {
+			em.clear();
+		}
+		return order;
+	}
+
+	/**
+	 * this method calculates the grand total price of the order list
+	 * @param orderList, Arraylist of orderline
+	 * @return double grandTotal
+	 */
+	@Override
+	public double getGrandTotal(List<Orderline> orderList) {
+		double grandTotal = 0.0;
+		if(orderList != null)
+		{
+			for(Orderline ol : orderList)
+			{
+				grandTotal += ol.getLineTotal();
+				grandTotal = Math.round(grandTotal*100.00)/100.00;
+			}
+		}
+		return grandTotal;
+	}
 }

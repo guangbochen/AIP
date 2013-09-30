@@ -55,7 +55,7 @@
 	<c:forEach var="p" items="${productList}">
   		<div class="col-sm-6 col-md-3"><br>
     		<div class="thumbnail">
-      			<img data-src="holder.js/300x200" alt=" img 300x200" src="..." style="width: 300px; height: 200px;">
+      			<img data-src="holder.js/300x200" alt=" img 300x200" src="assets/img/products/${p.category}${p.code}.jpg" style="width: 300px; height: 200px;">
       			<div class="caption">
 	        		<h4>Category: ${p.category}</h4>
 	        		<h4>Code: ${p.code}</h4>

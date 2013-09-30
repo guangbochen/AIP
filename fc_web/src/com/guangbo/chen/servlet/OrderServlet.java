@@ -18,7 +18,6 @@ import com.guangbo.chen.jpa.Product;
  * Servlet implementation class OrderServlet
  */
 public class OrderServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
 	private double grandTotal;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) 
@@ -164,12 +163,13 @@ public class OrderServlet extends HttpServlet {
 	 * @return double grandTotal
 	 */
 	private double calGrandTotal(ArrayList<Orderline> orderList) {
-		double grandTotal = 0.0;
+		double grandTotal = 0.00;
 		if(orderList != null)
 		{
 			for(Orderline ol : orderList)
 			{
 				grandTotal += ol.getLineTotal();
+				grandTotal = Math.round(grandTotal*100.00)/100.00;
 			}
 		}
 		return grandTotal;
