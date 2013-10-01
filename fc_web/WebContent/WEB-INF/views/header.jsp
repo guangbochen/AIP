@@ -17,7 +17,7 @@
 	  		<p> <a href="admin?action=manage">Manage orders</a> | <a href="index?action=logout">Logout</a></p>
 	  </c:when>
 	  <c:otherwise>
-          <form method="POST" action="index?action=login" id="login">
+          <form method="POST" action="login?action=login" id="login">
             <button class="btn btn-primary pull-right login_button" type="submit">Log in</button>
             <div class="${haserror }">
             <input type="text" class="form-control" placeholder="${invalid } username" name="username" id="username" value="${username }">

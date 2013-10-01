@@ -1,4 +1,4 @@
-package com.guangbo.chen.servlet;
+package com.guangbo.chen.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;

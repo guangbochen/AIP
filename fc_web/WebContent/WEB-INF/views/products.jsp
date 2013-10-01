@@ -84,7 +84,7 @@
     	<c:when test="${currentPage != 1}">
 			<c:choose>
 				<c:when test="${empty category}">
-					<li><a href="products?page=${currentPage - 1}">Previous</a></li>
+					<li><a href="products?action=products&page=${currentPage - 1}">Previous</a></li>
 				</c:when>
 				<c:otherwise>
 					<li><a href="products?action=category&category=${category }&page=${currentPage - 1}">Previous</a></li>
@@ -104,7 +104,7 @@
             <c:otherwise>
 			    <c:choose>
 					<c:when test="${empty category}">
-		                <li><a href="products?page=${i}">${i}</a></li>
+		                <li><a href="products?action=products&page=${i}">${i}</a></li>
 					</c:when>
 					<c:otherwise>
 		                <li><a href="products?action=category&category=${category }&page=${i}">${i}</a></li>
@@ -118,7 +118,7 @@
 	    <c:when test="${currentPage lt noOfPages}">
 		    <c:choose>
 				<c:when test="${empty category}">
-			        <li><a href="products?page=${currentPage + 1}">Next</a></li>
+			        <li><a href="products?action=products&page=${currentPage + 1}">Next</a></li>
 				</c:when>
 				<c:otherwise>
 					<li><a href="products?action=category&category=${category }&page=${currentPage + 1}">Next</a></li>

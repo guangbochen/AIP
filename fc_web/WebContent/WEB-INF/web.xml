@@ -1,57 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" id="WebApp_ID" version="2.5">
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns="http://java.sun.com/xml/ns/javaee" 
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
+	http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
   <display-name>fc_web</display-name>
   <welcome-file-list>
-    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>index</welcome-file>
   </welcome-file-list>
-  <servlet>
-    <description></description>
-    <display-name>ProductServlet</display-name>
-    <servlet-name>ProductServlet</servlet-name>
-    <servlet-class>com.guangbo.chen.servlet.ProductServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>ProductServlet</servlet-name>
-    <url-pattern>/products</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <description></description>
-    <display-name>IndexServlet</display-name>
-    <servlet-name>IndexServlet</servlet-name>
-    <servlet-class>com.guangbo.chen.servlet.IndexServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>IndexServlet</servlet-name>
-    <url-pattern>/index</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <description></description>
-    <display-name>OrderServlet</display-name>
-    <servlet-name>OrderServlet</servlet-name>
-    <servlet-class>com.guangbo.chen.servlet.OrderServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>OrderServlet</servlet-name>
-    <url-pattern>/orders</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <description></description>
-    <display-name>PurchaseServlet</display-name>
-    <servlet-name>PurchaseServlet</servlet-name>
-    <servlet-class>com.guangbo.chen.servlet.PurchaseServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>PurchaseServlet</servlet-name>
-    <url-pattern>/purchase</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <description></description>
-    <display-name>ViewOrderServlet</display-name>
-    <servlet-name>ViewOrderServlet</servlet-name>
-    <servlet-class>com.guangbo.chen.servlet.ViewOrderServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>ViewOrderServlet</servlet-name>
-    <url-pattern>/viewOrder</url-pattern>
-  </servlet-mapping>
 </web-app>

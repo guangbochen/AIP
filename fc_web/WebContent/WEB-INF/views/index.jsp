@@ -20,7 +20,7 @@
         <h1>Welcome to FC Sportsware Pty. Ltd.</h1>
         <p>FC Sportsware Pty. Ltd. has decided to launch an Online shop front to sell its range of soccer sportsware and equipment which they expect to both expand their business and cut costs associated with traditional "bricks and mortar" shop fronts. The Online shop front will sell a range of products including jerseys, shorts, socks, balls, goals and nets.</p>
         <p>
-          <a class="btn btn-lg btn-primary" href="products">View Products</a>
+          <a class="btn btn-lg btn-primary" href="products?action=products">View Products</a>
         </p>
       </div>
 	</div> <!-- end of body container -->

@@ -53,6 +53,25 @@ public class OrderEjbDao implements OrderDAO, OrderDAOLocal {
 		}
 	}
 
+
+	@Override
+	public Order findOrderByOrderNumAndSurname(String orderNum, String surname) {
+		Order order = new Order();
+		try {
+			order = (Order) em.createNamedQuery("order.viewOrder")
+					.setParameter(1, orderNum)
+					.setParameter(2, surname)
+					.getSingleResult();
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		finally {
+			em.clear();
+		}
+		return order;
+	}
+
 	/**
 	 * this method returns auto generated unique order number
 	 */
@@ -65,6 +84,7 @@ public class OrderEjbDao implements OrderDAO, OrderDAOLocal {
 	 * this method generates unique order number for each order
 	 * @return order number
 	 */
+	
 	private String generateOrderNum()
 	{
 		int orderId = 0;
@@ -86,25 +106,7 @@ public class OrderEjbDao implements OrderDAO, OrderDAOLocal {
 		}
 		return orderNumber;
 	}
-
-	@Override
-	public Order findOrderByOrderNumAndSurname(String orderNum, String surname) {
-		Order order = new Order();
-		try {
-			order = (Order) em.createNamedQuery("order.viewOrder")
-					.setParameter(1, orderNum)
-					.setParameter(2, surname)
-					.getSingleResult();
-		}
-		catch(Exception e) {
-			e.printStackTrace();
-		}
-		finally {
-			em.clear();
-		}
-		return order;
-	}
-
+	
 	/**
 	 * this method calculates the grand total price of the order list
 	 * @param orderList, Arraylist of orderline
