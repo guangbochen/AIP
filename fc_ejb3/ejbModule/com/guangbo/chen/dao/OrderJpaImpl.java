@@ -1,20 +1,16 @@
-package com.guangbo.chen.ejb;
+package com.guangbo.chen.dao;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-
 import com.guangbo.chen.jpa.Order;
 import com.guangbo.chen.jpa.Orderline;
 
 /**
  * Session Bean implementation class OrderEjbDao
  */
-@Stateless(name = "OrderEjb", mappedName = "ejb/order")
-public class OrderEjbDao implements OrderDAO, OrderDAOLocal {
+public class OrderJpaImpl implements OrderJpaDAO{
 	@PersistenceContext
 	private EntityManager em;
 	private final static String defaultStatus = "ORDERED";
@@ -24,9 +20,22 @@ public class OrderEjbDao implements OrderDAO, OrderDAOLocal {
 	/**
 	 * default constructor
 	 */
-    public OrderEjbDao() { 
+    public OrderJpaImpl() { 
     }
 
+	/**
+	 *  special ejb3 constructor to set the entity manager.
+	 */
+    public OrderJpaImpl(EntityManager em) 
+    {
+    	this.em = em;
+    }
+    
+    public void setEntityManager(EntityManager em)
+    {
+    	this.em = em;
+    }
+    
 	@Override
 	public void addOrder(ArrayList<Orderline> orderlines, Order order) {
 		try

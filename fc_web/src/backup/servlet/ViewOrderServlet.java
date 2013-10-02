@@ -1,16 +1,14 @@
-package com.guangbo.chen.controller;
+package backup.servlet;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.ejb.EJB;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import com.guangbo.chen.ejb.OrderDAO;
 import com.guangbo.chen.jpa.Order;
 import com.guangbo.chen.jpa.Orderline;

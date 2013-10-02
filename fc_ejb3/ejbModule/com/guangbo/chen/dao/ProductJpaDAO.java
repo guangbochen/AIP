@@ -1,14 +1,11 @@
-package com.guangbo.chen.ejb;
+package com.guangbo.chen.dao;
 
 import java.util.List;
-
-import javax.ejb.Local;
-import javax.persistence.EntityManager;
-
 import com.guangbo.chen.jpa.Product;
 
-@Local
-public interface ProductDAOLocal {
+
+public interface ProductJpaDAO {
+
 	//searching products
 	public List<Product> findAll();
 	public List<Product> findAllByPagination(int offset, int noOfRecords);

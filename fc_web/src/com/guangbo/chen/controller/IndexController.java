@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -14,7 +13,6 @@ import com.guangbo.chen.controller.action.IndexAction;
  * Servlet implementation class IndexServlet
  * this class handles index request and forwards relevant responses
  */
-@WebServlet("/index")
 public class IndexController extends HttpServlet 
 {
 	private Map<String,Action> actions;
@@ -36,8 +34,16 @@ public class IndexController extends HttpServlet
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
 	{
-		Action action = actions.get(request.getParameter("action"));
-		action.execute(request).dispatch(request, response);
+		try
+		{
+			Action action = actions.get(request.getParameter("action"));
+			action.execute(request).dispatch(request, response);
+		}
+		catch(Exception e)
+		{
+			Action action = actions.get("index");
+			action.execute(request).dispatch(request, response);
+		}
 	}
 
 }

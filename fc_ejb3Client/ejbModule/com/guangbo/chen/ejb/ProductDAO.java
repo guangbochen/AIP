@@ -16,5 +16,4 @@ public interface ProductDAO {
 	public List<Product> findAllByCategory(String category);
 	public List<Product> findAllCategoryByPagination(String category, int offset, int noOfRecords);
 	public List<String> findAllCategory();
-	public void setEntityManager(EntityManager em);
 }

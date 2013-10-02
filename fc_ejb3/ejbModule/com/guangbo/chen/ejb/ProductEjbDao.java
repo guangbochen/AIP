@@ -4,10 +4,9 @@ import java.util.List;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
-import javax.persistence.NamedQueries;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
-
+import com.guangbo.chen.dao.ProductJpaDAO;
+import com.guangbo.chen.dao.ProductJpaImple;
 import com.guangbo.chen.jpa.Product;
 
 /**
@@ -15,59 +14,34 @@ import com.guangbo.chen.jpa.Product;
  */
 @Stateless(name = "productEjb", mappedName = "ejb/product")
 public class ProductEjbDao implements ProductDAO, ProductDAOLocal {
+	@PersistenceContext
 	private EntityManager em;
+	private ProductJpaDAO pdao;
 
-	/**
-	 *  special ejb3 constructor to set the entity manager.
-	 */
-    public ProductEjbDao(EntityManager em) {
-    	this.em = em;
-    }
-    
-    public void setEntityManager(EntityManager em)
-    {
-      this.em = em;
-    }
-
-	@SuppressWarnings("unchecked")
 	@Override
 	public List<Product> findAll() {
-		List<Product> products = null;
-		products = em.createNamedQuery("product.findAll").getResultList();
-		return products;
+		pdao = new ProductJpaImple(em);
+		return pdao.findAll();
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public List<Product> findAllByPagination(int offset, int noOfRecords) {
-		List<Product> products = null;
-		products = em.createNamedQuery("product.findAll")
-				.setFirstResult(offset)
-				.setMaxResults(noOfRecords)
-				.getResultList();
+		pdao = new ProductJpaImple(em);
+		List<Product> products = pdao.findAllByPagination(offset, noOfRecords);
 		return products;
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public List<Product> findAllByCategory(String category) {
-		List<Product> products = null;
-		products = em.createNamedQuery("product.findAllByCategory")
-				.setParameter(1, category)
-				.getResultList();
+		pdao = new ProductJpaImple(em);
+		List<Product> products = pdao.findAllByCategory(category);
 		return products;
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
-	public List<Product> findAllCategoryByPagination(String category, int offset,
-			int noOfRecords) {
-		List<Product> products = null;
-		products = em.createNamedQuery("product.findAllByCategory")
-				.setParameter(1, category)
-				.setFirstResult(offset)
-				.setMaxResults(noOfRecords)
-				.getResultList();
+	public List<Product> findAllCategoryByPagination(String category, int offset, int noOfRecords) {
+		pdao = new ProductJpaImple(em);
+		List<Product> products = pdao.findAllCategoryByPagination(category, offset, noOfRecords);
 		return products;
 	}
 	
@@ -75,11 +49,10 @@ public class ProductEjbDao implements ProductDAO, ProductDAOLocal {
 	 * this method find all the category name
 	 * @return categoryList, list of category
 	 */
-	@SuppressWarnings("unchecked")
 	@Override
 	public List<String> findAllCategory() {
-		List<String> categoryList = null;
-		categoryList = em.createNamedQuery("product.findAllCategory").getResultList();
+		pdao = new ProductJpaImple(em);
+		List<String> categoryList = pdao.findAllCategory();
 		return categoryList;
 	}
 

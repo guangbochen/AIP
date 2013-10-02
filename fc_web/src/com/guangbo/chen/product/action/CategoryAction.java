@@ -1,13 +1,15 @@
 package com.guangbo.chen.product.action;
 
 import java.util.ArrayList;
+
 import javax.servlet.http.HttpServletRequest;
+
 import com.guangbo.chen.controller.Action;
 import com.guangbo.chen.controller.Dispatcher;
 import com.guangbo.chen.ejb.ProductDAO;
 import com.guangbo.chen.jpa.Product;
 
-public class ProductsAction implements Action{
+public class CategoryAction implements Action{
 	private ProductDAO pdao;
 	private final static int recordsPerPage = 8;
 	private int page;
@@ -15,21 +17,23 @@ public class ProductsAction implements Action{
 	private int noOfPages;
 	private ArrayList<Product> productList;
 	
-	public ProductsAction(ProductDAO pdao) {
+	
+	public CategoryAction(ProductDAO pdao) {
 		this.pdao = pdao;
 	}
-
-
 	@Override
 	public Dispatcher execute(HttpServletRequest request) {
+		
 		//initialize variables
 		productList = null;
 		page =1;
 		noOfRecords = 0;
 		noOfPages = 0;
 		
+		String category = request.getParameter("category");
+		
 		//displays all of the products
-		noOfRecords = pdao.findAll().size();
+		noOfRecords = pdao.findAllByCategory(category).size();
 		// calculates the total number of pages for paging
 		noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
 		
@@ -47,7 +51,7 @@ public class ProductsAction implements Action{
 		}
 		
 		//get a list product categories for category filter
-		productList = (ArrayList<Product>) pdao.findAllByPagination((page-1)*recordsPerPage,recordsPerPage);
+		productList = (ArrayList<Product>) pdao.findAllCategoryByPagination(category,(page-1)*recordsPerPage,recordsPerPage);
 		ArrayList<String> cateList = (ArrayList<String>) pdao.findAllCategory();
 		
 		//forward list of product to the products page
@@ -55,6 +59,8 @@ public class ProductsAction implements Action{
         request.setAttribute("cateList", cateList);
         request.setAttribute("noOfPages", noOfPages);
         request.setAttribute("currentPage", page);
+		request.setAttribute("category", category);
 		return new Dispatcher.Forward("products.jsp");
 	}
+
 }

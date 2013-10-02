@@ -40,7 +40,6 @@
 	    <h4>Category Filter</h4>
 	    <form method="POST" action="products?action=category">
 		    <select class="selection" name="category">
-					<option value="All" > All</option>
 		    	<c:forEach var="cate" items="${cateList}">
 					<option value="${cate}" >${cate}</option>
 			  	</c:forEach>

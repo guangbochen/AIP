@@ -7,7 +7,7 @@
        </div>
            <ul class="nav navbar-nav"> <br>
                <li><a href="products">View Products</a></li>
-               <li><a href="viewOrder">View Order</a></li>
+               <li><a href="orders?action=view">View Order</a></li>
                <li><a href="orders">Check Shopping Cart </a></li>
            </ul>
        <div class="nav navbar-nav navbar-right">
