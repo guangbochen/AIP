@@ -3,10 +3,13 @@ package com.guangbo.chen.controller;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+
+import javax.annotation.PostConstruct;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import com.guangbo.chen.controller.action.IndexAction;
 
 /**
@@ -17,7 +20,8 @@ public class IndexController extends HttpServlet
 {
 	private Map<String,Action> actions;
 	
-	public IndexController() {
+	@PostConstruct
+	public void init() {
 		actions = new HashMap<String,Action>();
 		actions.put("index", new IndexAction());
 		//set default action to index page
