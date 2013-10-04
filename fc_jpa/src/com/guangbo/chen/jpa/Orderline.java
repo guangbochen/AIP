@@ -16,7 +16,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="orderLines")
+@Table(name="orderlines")
 public class Orderline implements Serializable {
 
 	private int id;
@@ -61,7 +61,7 @@ public class Orderline implements Serializable {
 	/**
 	 * @return the product
 	 */
-	@OneToOne(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
+	@OneToOne(fetch=FetchType.EAGER, cascade=CascadeType.MERGE)
 	@JoinColumn(name="product_id", nullable = false)
 	public Product getProduct() {
 		return product;
@@ -77,7 +77,7 @@ public class Orderline implements Serializable {
 	/**
 	 * @return the order
 	 */
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER, cascade=CascadeType.ALL)
 	@JoinColumn(name = "order_id", nullable = false)
 	public Order getOrder() {
 		return order;
@@ -86,8 +86,8 @@ public class Orderline implements Serializable {
 	/**
 	 * @param order the order to set
 	 */
-	public void setOrder(Order order) {
-		this.order = order;
+	public void setOrder(Order orderx) {
+		this.order = orderx;
 	}
 	
 	/**

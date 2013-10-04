@@ -1,17 +1,15 @@
 package com.guangbo.chen.jpa;
 
 import static javax.persistence.GenerationType.IDENTITY;
-
 import java.io.Serializable;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
 @NamedQueries({
 	@NamedQuery(name = "product.findAll", query = "Select p From Product p"),
 	@NamedQuery(name = "product.findAllCategory", query = "Select p.category From Product p Group By p.category"),
