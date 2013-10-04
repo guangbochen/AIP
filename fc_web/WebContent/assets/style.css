@@ -1,9 +1,10 @@
 /*-------------------- Global CSS -----------------*/
 .body-wrapper
 {
-	min-height: 600px;
+	min-height: 800px;
 }
-/* css for the header */
+
+/* css for the navigation bar */
 .navbar-nav>li>a:hover {
     background-color: #2C2C2C !important;
     color: #FFFFFF !important;
@@ -11,10 +12,16 @@
 .navbar-right {
 	min-width:300px;
 }
+.navbar-brand 
+{
+	font-size: 20px;
+	color: #3276B1 !important;
+	font-weight: 700;
+}
 
 .form-control {
 	width: 200px;
-	margin:5px;
+	margin:3px;
 }
 
 /* css for the header */
@@ -55,6 +62,31 @@
 	margin-right:5px;
 }
 
+.footer {
+	font-size:16px;
+	mix-width:1024px;
+	max-width:1024px;
+	min-height:100px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+/* css for the purchase */
+.purchaseTable {
+	max-width:500px;
+}
+
+.purchase-cancel {
+	margin-top:-62px;
+}
+
+.topPadding {
+	padding-top:200px;
+}
+.notice {
+	padding:20px;
+}
+
 .myQuantity {
 	max-width:80px;
 	height: 34px;
@@ -72,48 +104,9 @@
 	transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
 }
 
-.footer {
-	max-width:1024px;
-	min-height:100px;
-}
-
-
-
-
-/* css for the purchase */
-.purchaseTable {
-	max-width:500px;
-}
-
-.purchase-cancel {
-	margin-top:-62px;
-}
-
-
-.topPadding {
-	padding-top:200px;
-}
-.notice {
-	padding:20px;
-}
-
-/* css for the admin */
-.searchButton
+.confirm-dialog
 {
-	margin-top:30px;
-	margin-left:5px;
-}
-
-.mySpace
-{
-	margin-top:120px;
-	width:100px;
-}
-
-.admin-update
-{
-	margin-left: 850px;
-	margin-top: -75px;
+	margin-top:300px;
 }
 
 /* css for the product page */
@@ -138,4 +131,29 @@
 {
 	margin-top:-60px;
 	margin-right:0px;
+}
+
+/* css for the view order */
+.v-submit
+{
+	margin-left:5px;
+}
+
+/* css for the admin */
+.searchButton
+{
+	margin-top:30px;
+	margin-left:5px;
+}
+
+.mySpace
+{
+	margin-top:120px;
+	width:100px;
+}
+
+.admin-update
+{
+	margin-left: 850px;
+	margin-top: -75px;
 }

@@ -3,6 +3,7 @@ package com.guangbo.chen.ejb;
 import java.util.List;
 
 import javax.ejb.Remote;
+import javax.persistence.EntityManager;
 
 import com.guangbo.chen.jpa.Product;
 

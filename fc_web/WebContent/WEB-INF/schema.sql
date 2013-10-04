@@ -19,7 +19,7 @@ CREATE TABLE IF NOT EXISTS products (
 CREATE TABLE IF NOT EXISTS orderlines (
     id          	INTEGER NOT  NULL AUTO_INCREMENT,
     product_id  	INTEGER NOT NULL,
-    orderNumber 	VARCHAR(255) NOT NULL,
+    order_id 		INTEGER NOT NULL,
     quantity    	INTEGER(10) NOT NULL,
     lineTotal   	DOUBLE(7,2) NOT NULL,
     PRIMARY KEY (id),
@@ -41,7 +41,6 @@ CREATE TABLE IF NOT EXISTS orders (
     country         VARCHAR(32) NOT NULL,
     paymentDetails  VARCHAR(100) NOT NULL,
     status          VARCHAR(7) NOT NULL,
-    grandTotal      DOUBLE(7,2) NOT NULL,
     PRIMARY KEY (id)
 );
 
