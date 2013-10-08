@@ -5,11 +5,17 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.annotation.PostConstruct;
+import javax.ejb.EJB;
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.guangbo.chen.ejb.CartBeanDAO;
+import com.guangbo.chen.jpa.Orderline;
 import com.guangbo.chen.order.action.CancelOrderAction;
 import com.guangbo.chen.order.action.CheckCartAction;
 import com.guangbo.chen.order.action.DeleteOrderAction;
@@ -18,13 +24,15 @@ import com.guangbo.chen.order.action.UpdateOrderAction;
 import com.guangbo.chen.order.action.ViewOrderAction;
 
 public class OrderController extends HttpServlet {
+	@EJB (name="CartBean",mappedName="ejb/cartBean")
+	private CartBeanDAO cartBean;
 	private Map<String,Action> actions;
 	
 	
 	@PostConstruct
     public void init() {
 		actions = new HashMap<String,Action>();
-		actions.put("default", new CheckCartAction());
+		actions.put("default", new CheckCartAction(cartBean));
 		actions.put("view",		 new ViewOrderAction());
 		actions.put("update", 	 new UpdateOrderAction());
 		actions.put("delete", 	 new DeleteOrderAction());
@@ -39,6 +47,18 @@ public class OrderController extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		if(cartBean != null)
+		{
+			for(Orderline ol :cartBean.getOrderList() )
+			{
+				System.out.println(" order"+ ol.getProduct().getCode());
+			}
+		}
+		else
+		{
+			System.out.println("order list is empty");
+		}
+		
 		try
 		{
 			Action action = actions.get(request.getParameter("action"));
@@ -49,6 +69,10 @@ public class OrderController extends HttpServlet {
 			Action action = actions.get("default");
 			action.execute(request).dispatch(request, response);
 		}
+	}
+	
+	private void initBean() throws NamingException {
+		Context ctx = new InitialContext();
 	}
 
 }

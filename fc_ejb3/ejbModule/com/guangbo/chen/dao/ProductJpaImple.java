@@ -27,7 +27,7 @@ public class ProductJpaImple implements ProductJpaDAO {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Product> findAll() {
-		ProductJpaDAO pdao = new ProductJpaImple(em);
+		
 		List<Product> products = null;
 		try
 		{
@@ -43,6 +43,7 @@ public class ProductJpaImple implements ProductJpaDAO {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Product> findAllByPagination(int offset, int noOfRecords) {
+		
 		List<Product> products = null;
 		try
 		{
@@ -61,6 +62,7 @@ public class ProductJpaImple implements ProductJpaDAO {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Product> findAllByCategory(String category) {
+		
 		List<Product> products = null;
 		try
 		{
@@ -78,6 +80,7 @@ public class ProductJpaImple implements ProductJpaDAO {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Product> findAllCategoryByPagination(String category, int offset, int noOfRecords) {
+		
 		List<Product> products = null;
 		try
 		{
@@ -95,12 +98,13 @@ public class ProductJpaImple implements ProductJpaDAO {
 	}
 	
 	/**
-	 * this method find all the category name
+	 * this method return a list of available products category 
 	 * @return categoryList, list of category
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<String> findAllCategory() {
+		
 		List<String> categoryList = null;
 		try
 		{

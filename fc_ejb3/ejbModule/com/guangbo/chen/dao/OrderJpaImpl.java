@@ -11,17 +11,11 @@ import com.guangbo.chen.jpa.Orderline;
  * Session Bean implementation class OrderEjbDao
  */
 public class OrderJpaImpl implements OrderJpaDAO{
-	@PersistenceContext
 	private EntityManager em;
 	private final static String defaultStatus = "ORDERED";
 	private final static String prefixOfUniqueId = "guchen";
 	private static String orderNumber = null;
 
-	/**
-	 * default constructor
-	 */
-    public OrderJpaImpl() { 
-    }
 
 	/**
 	 *  special ejb3 constructor to set the entity manager.
