@@ -17,7 +17,7 @@ import com.guangbo.chen.jpa.Product;
  * Session Bean implementation class ProductEjbDao
  */
 @Stateless(name = "productEjb", mappedName = "ejb/product")
-public class ProductEjbDao implements ProductDAO, ProductDAOLocal {
+public class ProductBean implements ProductBeanRemote, ProductBeanLocal {
 	@PersistenceContext
 	private EntityManager em;
 	private ProductJpaDAO pdao;

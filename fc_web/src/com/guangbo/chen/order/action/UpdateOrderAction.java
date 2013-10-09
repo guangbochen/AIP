@@ -7,11 +7,11 @@ import javax.servlet.http.HttpSession;
 
 import com.guangbo.chen.controller.Action;
 import com.guangbo.chen.controller.Dispatcher;
-import com.guangbo.chen.ejb.OrderDAO;
+import com.guangbo.chen.ejb.OrderBeanRemote;
 import com.guangbo.chen.jpa.Orderline;
 
 public class UpdateOrderAction implements Action {
-	private OrderDAO odao;
+	private OrderBeanRemote odao;
 
 	@Override
 	public Dispatcher execute(HttpServletRequest request) {

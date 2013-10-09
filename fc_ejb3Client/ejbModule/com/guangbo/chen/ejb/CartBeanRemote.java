@@ -6,7 +6,7 @@ import com.guangbo.chen.jpa.Orderline;
 import com.guangbo.chen.jpa.Product;
 
 @Remote
-public interface CartBeanDAO {
+public interface CartBeanRemote {
 	public void addToCart(Product p, int quantity);
 	public Collection<Orderline> getOrderList();
 }

@@ -7,11 +7,11 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.guangbo.chen.controller.Action;
 import com.guangbo.chen.controller.Dispatcher;
-import com.guangbo.chen.ejb.ProductDAO;
+import com.guangbo.chen.ejb.ProductBeanRemote;
 import com.guangbo.chen.jpa.Product;
 
 public class CategoryAction implements Action{
-	private ProductDAO pdao;
+	private ProductBeanRemote pdao;
 	private final static int recordsPerPage = 8;
 	private int page;
 	private int noOfRecords;
@@ -19,7 +19,7 @@ public class CategoryAction implements Action{
 	private ArrayList<Product> productList;
 	
 	
-	public CategoryAction(ProductDAO pdao) {
+	public CategoryAction(ProductBeanRemote pdao) {
 		this.pdao = pdao;
 	}
 	

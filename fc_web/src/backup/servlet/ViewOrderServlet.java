@@ -9,7 +9,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import com.guangbo.chen.ejb.OrderDAO;
+import com.guangbo.chen.ejb.OrderBeanRemote;
 import com.guangbo.chen.jpa.Order;
 import com.guangbo.chen.jpa.Orderline;
 
@@ -18,7 +18,7 @@ import com.guangbo.chen.jpa.Orderline;
  */
 public class ViewOrderServlet extends HttpServlet {
 	@EJB (name="OrderEjb",mappedName="ejb/order")
-	private OrderDAO odao; 
+	private OrderBeanRemote odao; 
 
     /**
      * this method calls dopost request

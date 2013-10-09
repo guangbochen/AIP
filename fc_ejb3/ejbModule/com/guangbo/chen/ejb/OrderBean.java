@@ -17,7 +17,7 @@ import com.guangbo.chen.jpa.Orderline;
  * Session Bean implementation class OrderEjbDao
  */
 @Stateless(name = "OrderEjb", mappedName = "ejb/order")
-public class OrderEjbDao implements OrderDAO, OrderDAOLocal {
+public class OrderBean implements OrderBeanRemote, OrderBeanLocal {
 	@PersistenceContext
 	private EntityManager em;
 	private OrderJpaDAO odao;

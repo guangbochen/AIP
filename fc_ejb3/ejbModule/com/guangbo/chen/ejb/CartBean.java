@@ -12,8 +12,8 @@ import com.guangbo.chen.jpa.Product;
  * Session Bean implementation class CartBean
  */
 @Stateful(mappedName = "ejb/cartBean")
-public class CartBean implements CartBeanDAO, CartBeanDAOLocal {
-	private OrderEjbDao odao ;
+public class CartBean implements CartBeanRemote, CartBeanLocal {
+	private OrderBean odao ;
 	private ArrayList<Orderline> orderList = new ArrayList<Orderline>();
 	
 	@Override
