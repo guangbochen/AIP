@@ -1,4 +1,4 @@
-package com.guangbo.chen.controller.action;
+package com.guangbo.chen.index.action;
 
 import javax.servlet.http.HttpServletRequest;
 

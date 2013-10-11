@@ -18,7 +18,7 @@
         <p><a href="index">Home</a> >> <a href="orders">Check My Shopping cart</a> >> Purchase My Order</p>
         <hr/>
         
-        <form method="POST" action="purchase?action=submit">
+        <form method="POST" action="purchase?action=purchase">
         <table class="table table-striped purchaseTable">
         	<tr>
         		<td>Title : </td>
@@ -34,7 +34,7 @@
         	</tr>
         	<tr>
         		<td>Email name : </td>
-        		<td><input type="text" name="email" value="test@email.com.au" placeholder="${isempty}" id="email"></td>
+        		<td><input type="text" name="email" value="joesBlog@email.com.au" placeholder="${isempty}" id="email"></td>
         	</tr>
         	<tr>
         		<td>House/Unit number : </td>

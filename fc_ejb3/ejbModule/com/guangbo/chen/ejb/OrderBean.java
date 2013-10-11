@@ -30,7 +30,7 @@ public class OrderBean implements OrderBeanRemote, OrderBeanLocal {
 	}
 	
 	@Override
-	public void addOrder(ArrayList<Orderline> orderlines, Order order) {
+	public void addOrder(List<Orderline> orderlines, Order order) {
 		odao.addOrder(orderlines, order);
 	}
 

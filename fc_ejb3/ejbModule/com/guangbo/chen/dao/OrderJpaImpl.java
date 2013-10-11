@@ -31,7 +31,7 @@ public class OrderJpaImpl implements OrderJpaDAO{
     }
     
 	@Override
-	public void addOrder(ArrayList<Orderline> orderlines, Order order) {
+	public void addOrder(List<Orderline> orderlines, Order order) {
 		try
 		{
 			//insert customer order and associated orderlines into the database

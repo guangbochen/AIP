@@ -34,4 +34,14 @@
     <servlet-name>OrderController</servlet-name>
     <url-pattern>/orders</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>PurchaseController</display-name>
+    <servlet-name>PurchaseController</servlet-name>
+    <servlet-class>com.guangbo.chen.controller.PurchaseController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>PurchaseController</servlet-name>
+    <url-pattern>/purchase</url-pattern>
+  </servlet-mapping>
 </web-app>

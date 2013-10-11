@@ -21,7 +21,7 @@
 	        <p> Are you sure you want to purchasing the order ? </p>
 	      </div>
 		    <div class="modal-footer">
-		        <a href="purchase?action=cancle"><button type="button" class="btn btn-default" >Cancel</button></a>
+		        <a href="orders"><button type="button" class="btn btn-default" >Cancel</button></a>
 		        <a href="purchase?action=process"><button type="button" class="btn btn-primary" >Proceed</button></a>
 	        </div>
 	    </div><!-- /.modal-content -->

@@ -1,10 +1,7 @@
 package com.guangbo.chen.ejb;
 
-import java.util.ArrayList;
 import java.util.List;
-
 import javax.ejb.Remote;
-
 import com.guangbo.chen.jpa.Order;
 import com.guangbo.chen.jpa.Orderline;
 
@@ -12,7 +9,7 @@ import com.guangbo.chen.jpa.Orderline;
 public interface OrderBeanRemote {
 	
 	//Basic CRUD for OrderEjbDao
-	public void addOrder(ArrayList<Orderline> orderList, Order order);
+	public void addOrder(List<Orderline> orderList, Order order);
 	
 	//searching and getting method
 	public String getUniqueOrderNum();

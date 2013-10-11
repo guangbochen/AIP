@@ -2,7 +2,10 @@ package com.guangbo.chen.ejb;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
 
+import javax.annotation.PreDestroy;
 import javax.ejb.Stateful;
 
 import com.guangbo.chen.jpa.Orderline;
@@ -13,7 +16,6 @@ import com.guangbo.chen.jpa.Product;
  */
 @Stateful(mappedName = "ejb/cartBean")
 public class CartBean implements CartBeanRemote, CartBeanLocal {
-	private OrderBean odao ;
 	private ArrayList<Orderline> orderList = new ArrayList<Orderline>();
 	
 	@Override
@@ -51,11 +53,53 @@ public class CartBean implements CartBeanRemote, CartBeanLocal {
 
 	@Override
 	public Collection<Orderline> getOrderList() {
-		for(Orderline ol : orderList)
-		{
-			System.out.println(ol.getProduct().getCategory());
-		}
 		return orderList;
 	}
+
+	@Override
+	public void updateOrder(int quantity, int productId) {
+		if(orderList != null || !orderList.isEmpty())
+		{
+			for(Orderline ol : orderList)
+			{
+				//update product quantity via product id
+				if(ol.getProduct().getId() == productId)
+				{
+					//update lineTotal
+					ol.setQuantity(quantity);
+					double lineTotal = quantity*ol.getProduct().getPrice();
+					ol.setLineTotal(lineTotal);
+					break;
+				}
+			}
+		}
+	}
+
+	@Override
+	public double getGrandTotal() {
+		double grandTotal = 0.00;
+		if(orderList != null)
+		{
+			for(Orderline ol : orderList)
+			{
+				grandTotal += ol.getLineTotal();
+				grandTotal = Math.round(grandTotal*100.00)/100.00;
+			}
+		}
+		return grandTotal;
+	}
+
+	@Override
+	public void deleteOrder(int productId) {
+		for (Iterator<Orderline> it = orderList.iterator(); it.hasNext(); )
+		{
+			Orderline ol = (Orderline) it.next();  
+			if(ol.getProduct().getId() == productId )
+			{
+				it.remove();
+			}
+		}
+	}
+	
 
 }

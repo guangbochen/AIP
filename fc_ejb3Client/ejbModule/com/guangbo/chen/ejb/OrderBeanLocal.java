@@ -12,7 +12,7 @@ import com.guangbo.chen.jpa.Orderline;
 public interface OrderBeanLocal {
 	
 	//Basic CRUD for OrderEjbDao
-	public void addOrder(ArrayList<Orderline> orderList, Order order);
+	public void addOrder(List<Orderline> orderList, Order order);
 	
 	//searching and getting method
 	public String getUniqueOrderNum();

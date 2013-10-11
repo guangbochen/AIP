@@ -3,14 +3,13 @@ package com.guangbo.chen.controller;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-
 import javax.annotation.PostConstruct;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.guangbo.chen.controller.action.IndexAction;
+import com.guangbo.chen.index.action.IndexAction;
 
 /**
  * Servlet implementation class IndexServlet
@@ -45,6 +44,7 @@ public class IndexController extends HttpServlet
 		}
 		catch(Exception e)
 		{
+			e.printStackTrace();
 			Action action = actions.get("index");
 			action.execute(request).dispatch(request, response);
 		}
