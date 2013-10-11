@@ -2,8 +2,10 @@ package com.guangbo.chen.dao;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+
 import com.guangbo.chen.jpa.Order;
 import com.guangbo.chen.jpa.Orderline;
 
@@ -119,5 +121,21 @@ public class OrderJpaImpl implements OrderJpaDAO{
 			}
 		}
 		return grandTotal;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Order> findOutstandingOrders() {
+		List<Order> orders = new ArrayList<Order>();
+		try {
+			orders = em.createNamedQuery("order.findOutstandingOrders")
+					.setParameter(1, "ORDERED")
+					.setParameter(2, "PAID")
+					.getResultList();
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		return orders;
 	}
 }

@@ -1,4 +1,4 @@
-package com.guangbo.chen.order.action;
+package com.guangbo.chen.viewOrder.action;
 
 import javax.servlet.http.HttpServletRequest;
 

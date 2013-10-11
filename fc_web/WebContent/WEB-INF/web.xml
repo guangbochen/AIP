@@ -44,4 +44,24 @@
     <servlet-name>PurchaseController</servlet-name>
     <url-pattern>/purchase</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ViewOrderController</display-name>
+    <servlet-name>ViewOrderController</servlet-name>
+    <servlet-class>com.guangbo.chen.controller.ViewOrderController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ViewOrderController</servlet-name>
+    <url-pattern>/viewOrder</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>AdminController</display-name>
+    <servlet-name>AdminController</servlet-name>
+    <servlet-class>com.guangbo.chen.admin.controller.AdminController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AdminController</servlet-name>
+    <url-pattern>/admin</url-pattern>
+  </servlet-mapping>
 </web-app>

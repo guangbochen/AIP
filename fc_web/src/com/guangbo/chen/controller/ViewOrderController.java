@@ -5,34 +5,32 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.annotation.PostConstruct;
+import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.guangbo.chen.order.action.CancelOrderAction;
-import com.guangbo.chen.order.action.CheckCartAction;
-import com.guangbo.chen.order.action.DeleteOrderAction;
-import com.guangbo.chen.order.action.PurchaseOrderAction;
-import com.guangbo.chen.order.action.UpdateOrderAction;
+import com.guangbo.chen.ejb.OrderBeanRemote;
+import com.guangbo.chen.viewOrder.action.CheckViewOrderAction;
 import com.guangbo.chen.viewOrder.action.ViewOrderAction;
 
-public class OrderController extends HttpServlet {
+/**
+ * Servlet implementation class ViewOrderController
+ */
+public class ViewOrderController extends HttpServlet {
+	@EJB (name="OrderEjb",mappedName="ejb/order")
+	private OrderBeanRemote oBean; 
 	private Map<String,Action> actions;
 	
 	@PostConstruct
     public void init() {
 		actions = new HashMap<String,Action>();
-		actions.put("default", new CheckCartAction());
-		actions.put("update", 	 new UpdateOrderAction());
-		actions.put("delete", 	 new DeleteOrderAction());
-		actions.put("cancel", 	 new CancelOrderAction());
-		actions.put("purchase",  new PurchaseOrderAction());
-		actions.put("view",		 new ViewOrderAction());
-		//set default action to index page
+		actions.put("default", new ViewOrderAction());
+		actions.put("check", new CheckViewOrderAction(oBean));
 		actions.put(null, actions.get("default"));
     }
-
+	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doPost(request, response);
 	}

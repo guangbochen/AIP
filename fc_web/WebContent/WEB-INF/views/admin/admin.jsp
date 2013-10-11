@@ -1,0 +1,59 @@
+<!--  this page is default admin home page -->
+<%@ page language="java" contentType="text/html" import="" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+    <title>FC Sportsware</title>
+    <!-- inner class css -->
+    <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="assets/style.css">
+</head>
+<body>
+
+  	<!-- access with login as admin -->
+	<%@ include file="header.jsp" %>
+	<!-- admin page content -->
+    <div class="container body-wrapper">
+        <p><a href="index">Home</a> >> Admin</p>
+    	<hr>
+    	
+    	<h3>Outstanding Orders:</h3> <br>
+    	<!-- displays outstanding orders -->
+    	<table class="table table-bordered table-hover">
+    		<tr class="warning">
+    		<th>Order Number</th>
+    		<th>Surname</th>
+    		<th>Country</th>
+    		<th>Postcode</th>
+    		<th>Grand Total of Order</th>
+    		<th>Status Code</th>
+    		</tr>
+	    	<c:forEach var="order" items="${orders}">
+	    	<tr>
+	    		<td><a href="admin?action=searchOrder&nu=${order.orderNumber }">${order.orderNumber }</a></td>
+	    		<td>${order.surname }</td>
+	    		<td>${order.country }</td>
+	    		<td>${order.postCode }</td>
+	    		<td>${grandTotal }</td>
+	    		<td>${order.status }</td>
+	    	</tr>
+	    	</c:forEach>
+    	</table>
+	
+    	<!-- Shows successful updating order info -->
+   		<c:choose>
+   			<c:when test="${not empty updateSuccess }">
+		    	<div class="alert alert-success">
+   				<p>${updateSuccess }</p>
+		    	</div>
+   			</c:when>
+   			<c:otherwise>
+   			</c:otherwise>
+   		</c:choose>
+    	
+	</div>
+	<!-- end of container -->
+	<%@ include file="footer.jsp" %>
+</body>
+</html>

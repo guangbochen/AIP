@@ -14,4 +14,8 @@ public interface OrderJpaDAO {
 	public String getUniqueOrderNum();
 	public double getGrandTotal(List<Orderline> ols);
 	public Order findOrderByOrderNumAndSurname(String orderNum, String surname);
+	
+	
+	//admin searching methods
+	public List<Order> findOutstandingOrders();
 }

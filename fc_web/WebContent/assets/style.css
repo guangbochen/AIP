@@ -26,7 +26,7 @@
 
 /* css for the header */
 .login_button {
-	margin-top:37px;
+	margin-top:20px;
 }
 
 .container {
@@ -156,4 +156,11 @@
 {
 	margin-left: 850px;
 	margin-top: -75px;
+}
+
+.admin-brand 
+{
+	font-size: 20px;
+	color: #47B224 !important;
+	font-weight: 700;
 }

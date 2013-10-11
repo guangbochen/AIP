@@ -20,7 +20,8 @@ import javax.persistence.NamedQuery;
 
 @NamedQueries({
 	@NamedQuery(name = "order.getUniqueNum", query = "Select MAX(o.id) From Order o"),
-	@NamedQuery(name = "order.viewOrder", query = "Select o From Order o Where o.orderNumber Like ?1 And o.surname Like ?2")
+	@NamedQuery(name = "order.viewOrder", query = "Select o From Order o Where o.orderNumber Like ?1 And o.surname Like ?2"),
+	@NamedQuery(name = "order.findOutstandingOrders", query = "Select o From Order o Where o.status Like ?1 Or o.status Like ?2")
 })
 @Entity
 @Table(name="orders", uniqueConstraints = {

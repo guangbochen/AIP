@@ -11,9 +11,13 @@ public interface OrderBeanRemote {
 	//Basic CRUD for OrderEjbDao
 	public void addOrder(List<Orderline> orderList, Order order);
 	
-	//searching and getting method
+	//searching and getting methods
 	public String getUniqueOrderNum();
 	public double getGrandTotal(List<Orderline> ols);
 	public Order findOrderByOrderNumAndSurname(String orderNum, String surname);
+	
+	
+	//admin searching methods
+	public List<Order> findOutstandingOrders();
 
 }

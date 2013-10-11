@@ -1,37 +1,35 @@
-package com.guangbo.chen.controller;
+package com.guangbo.chen.admin.controller;
 
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
 import javax.annotation.PostConstruct;
+import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.guangbo.chen.order.action.CancelOrderAction;
-import com.guangbo.chen.order.action.CheckCartAction;
-import com.guangbo.chen.order.action.DeleteOrderAction;
-import com.guangbo.chen.order.action.PurchaseOrderAction;
-import com.guangbo.chen.order.action.UpdateOrderAction;
-import com.guangbo.chen.viewOrder.action.ViewOrderAction;
+import com.guangbo.chen.admin.action.OutstandingOrderAction;
+import com.guangbo.chen.controller.Action;
+import com.guangbo.chen.ejb.OrderBeanRemote;
 
-public class OrderController extends HttpServlet {
+/**
+ * Servlet implementation class AdminController
+ */
+public class AdminController extends HttpServlet {
+	@EJB (name="OrderEjb",mappedName="ejb/order")
+	private OrderBeanRemote oBean; 
 	private Map<String,Action> actions;
 	
 	@PostConstruct
-    public void init() {
+	public void init() {
 		actions = new HashMap<String,Action>();
-		actions.put("default", new CheckCartAction());
-		actions.put("update", 	 new UpdateOrderAction());
-		actions.put("delete", 	 new DeleteOrderAction());
-		actions.put("cancel", 	 new CancelOrderAction());
-		actions.put("purchase",  new PurchaseOrderAction());
-		actions.put("view",		 new ViewOrderAction());
+		actions.put("viewOrder", new OutstandingOrderAction(oBean));
 		//set default action to index page
-		actions.put(null, actions.get("default"));
-    }
+		actions.put(null, actions.get("viewOrder"));
+	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doPost(request, response);
@@ -46,7 +44,7 @@ public class OrderController extends HttpServlet {
 		catch(Exception e)
 		{
 			e.printStackTrace();
-			Action action = actions.get("default");
+			Action action = actions.get("index");
 			action.execute(request).dispatch(request, response);
 		}
 	}

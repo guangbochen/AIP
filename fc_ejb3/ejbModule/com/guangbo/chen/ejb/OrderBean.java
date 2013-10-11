@@ -57,4 +57,9 @@ public class OrderBean implements OrderBeanRemote, OrderBeanLocal {
 	public double getGrandTotal(List<Orderline> orderList) {
 		return odao.getGrandTotal(orderList);
 	}
+
+	@Override
+	public List<Order> findOutstandingOrders() {
+		return odao.findOutstandingOrders();
+	}
 }
