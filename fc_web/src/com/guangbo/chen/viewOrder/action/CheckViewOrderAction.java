@@ -34,7 +34,7 @@ public class CheckViewOrderAction implements Action{
 		else
 		{
 			Order order = oBean.findOrderByOrderNumAndSurname(number, name);
-			List<Orderline> ols = (List<Orderline>) order.getOrderLines();
+			List<Orderline> ols = (List<Orderline>) order.getOrderlines();
 			double grandTotal = oBean.getGrandTotal(ols);
 			request.setAttribute("order", order);
 			request.setAttribute("orderlines", ols);

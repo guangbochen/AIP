@@ -39,7 +39,7 @@ public class OrderJpaImpl implements OrderJpaDAO{
 			//insert customer order and associated orderlines into the database
 			order.setOrderNumber(generateOrderNum());
 			order.setStatus(defaultStatus);
-			order.setOrderLines(orderlines);
+			order.setOrderlines(orderlines);
 			em.persist(order);
 			for(Orderline ol : orderlines)
 			{
@@ -137,5 +137,34 @@ public class OrderJpaImpl implements OrderJpaDAO{
 			e.printStackTrace();
 		}
 		return orders;
+	}
+
+	@Override
+	public Order findOrderByOrderNumber(String orderNumber) {
+		Order order = new Order();
+		try {
+			order = (Order) em.createNamedQuery("order.findOrderByOrderNum")
+					.setParameter(1, orderNumber)
+					.getSingleResult();
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+		return order;
+	}
+
+	@Override
+	public void updateOrderStatus(String orderNumber, String status) {
+		try {
+			Order order = (Order) em.createNamedQuery("order.findOrderByOrderNum")
+					.setParameter(1, orderNumber)
+					.getSingleResult();
+			order.setStatus(status);
+			em.merge(order);
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
 	}
 }

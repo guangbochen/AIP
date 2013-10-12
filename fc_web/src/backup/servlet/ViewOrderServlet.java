@@ -61,7 +61,7 @@ public class ViewOrderServlet extends HttpServlet {
 		else
 		{
 			Order order = odao.findOrderByOrderNumAndSurname(number, name);
-			List<Orderline> ols = (List<Orderline>) order.getOrderLines();
+			List<Orderline> ols = (List<Orderline>) order.getOrderlines();
 			double grandTotal = odao.getGrandTotal(ols);
 			request.setAttribute("order", order);
 			request.setAttribute("orderlines", ols);

@@ -18,4 +18,6 @@ public interface OrderJpaDAO {
 	
 	//admin searching methods
 	public List<Order> findOutstandingOrders();
+	public Order findOrderByOrderNumber(String orderNumber);
+	public void updateOrderStatus(String orderNumber, String status);
 }

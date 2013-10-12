@@ -2,7 +2,7 @@
  <!-- start of nav bar -->
    <div class="navbar navbar-default">
      <div class="container">
-       <div class="navbar-header"> <br>
+       <div class="navbar-header">
            <a class="navbar-brand" href="index"><span class="glyphicon glyphicon-globe"></span> FC Sportsware Pty. Ltd.</a>
        </div>
            <ul class="nav navbar-nav"> <br>

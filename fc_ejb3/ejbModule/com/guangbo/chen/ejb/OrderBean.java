@@ -1,6 +1,5 @@
 package com.guangbo.chen.ejb;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -21,7 +20,6 @@ public class OrderBean implements OrderBeanRemote, OrderBeanLocal {
 	@PersistenceContext
 	private EntityManager em;
 	private OrderJpaDAO odao;
-
 
 	@PostConstruct
 	public void init()
@@ -58,8 +56,20 @@ public class OrderBean implements OrderBeanRemote, OrderBeanLocal {
 		return odao.getGrandTotal(orderList);
 	}
 
+	
 	@Override
 	public List<Order> findOutstandingOrders() {
 		return odao.findOutstandingOrders();
 	}
+
+	@Override
+	public Order findOrderByOrderNumber(String orderNumber) {
+		return odao.findOrderByOrderNumber(orderNumber);
+	}
+
+	@Override
+	public void updateOrderStatus(String orderNumber, String status) {
+		odao.updateOrderStatus(orderNumber, status);
+	}
+
 }

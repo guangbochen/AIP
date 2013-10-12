@@ -1,6 +1,7 @@
 <!--  this page is default admin home page -->
 <%@ page language="java" contentType="text/html" import="" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
@@ -30,12 +31,17 @@
     		<th>Status Code</th>
     		</tr>
 	    	<c:forEach var="order" items="${orders}">
+	    		<c:set var="grandTotal" value="0" />
 	    	<tr>
-	    		<td><a href="admin?action=searchOrder&nu=${order.orderNumber }">${order.orderNumber }</a></td>
+	    		<td><a href="admin?action=check&nu=${order.orderNumber }">${order.orderNumber }</a></td>
 	    		<td>${order.surname }</td>
 	    		<td>${order.country }</td>
 	    		<td>${order.postCode }</td>
-	    		<td>${grandTotal }</td>
+	    		<!-- calculate the grandtotal via adding all the linetotal -->
+		    	<c:forEach var="ol" items="${order.orderlines }">
+		    		<c:set var="grandTotal" value="${grandTotal + ol.lineTotal }" />
+	    		</c:forEach>
+	    		<td>$ <fmt:formatNumber minFractionDigits="2" value=" ${grandTotal }"></fmt:formatNumber></td>
 	    		<td>${order.status }</td>
 	    	</tr>
 	    	</c:forEach>

@@ -17,7 +17,9 @@ public interface OrderBeanRemote {
 	public Order findOrderByOrderNumAndSurname(String orderNum, String surname);
 	
 	
-	//admin searching methods
+	//admin methods
 	public List<Order> findOutstandingOrders();
+	public Order findOrderByOrderNumber(String orderNumber);
+	public void updateOrderStatus(String orderNumber, String status);
 
 }

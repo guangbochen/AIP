@@ -11,7 +11,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.guangbo.chen.admin.action.CheckOutstandingOrderAction;
 import com.guangbo.chen.admin.action.OutstandingOrderAction;
+import com.guangbo.chen.admin.action.UpdateOutstandingOrderAction;
 import com.guangbo.chen.controller.Action;
 import com.guangbo.chen.ejb.OrderBeanRemote;
 
@@ -27,7 +29,9 @@ public class AdminController extends HttpServlet {
 	public void init() {
 		actions = new HashMap<String,Action>();
 		actions.put("viewOrder", new OutstandingOrderAction(oBean));
-		//set default action to index page
+		actions.put("check", new CheckOutstandingOrderAction(oBean));
+		actions.put("update", new UpdateOutstandingOrderAction(oBean));
+		//set default action to view outstanding order page
 		actions.put(null, actions.get("viewOrder"));
 	}
 
@@ -43,9 +47,9 @@ public class AdminController extends HttpServlet {
 		}
 		catch(Exception e)
 		{
-			e.printStackTrace();
-			Action action = actions.get("index");
+			Action action = actions.get("viewOrder");
 			action.execute(request).dispatch(request, response);
+			e.printStackTrace();
 		}
 	}
 
