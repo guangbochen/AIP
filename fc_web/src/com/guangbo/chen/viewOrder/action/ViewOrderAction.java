@@ -1,15 +1,15 @@
-package com.guangbo.chen.controller.action;
+package com.guangbo.chen.viewOrder.action;
 
 import javax.servlet.http.HttpServletRequest;
 
 import com.guangbo.chen.controller.Action;
 import com.guangbo.chen.controller.Dispatcher;
 
-public class IndexAction implements Action {
+public class ViewOrderAction implements Action{
 
 	@Override
 	public Dispatcher execute(HttpServletRequest request) {
-		return new Dispatcher.Forward("index.jsp");
+		return new Dispatcher.Forward("viewOrder.jsp");
 	}
 
 }

@@ -8,7 +8,7 @@ import javax.persistence.EntityManager;
 import com.guangbo.chen.jpa.Product;
 
 @Remote
-public interface ProductDAO {
+public interface ProductBeanRemote {
 
 	//searching products
 	public List<Product> findAll();

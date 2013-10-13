@@ -2,9 +2,13 @@ package com.guangbo.chen.ejb;
 
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+
+import org.hibernate.service.spi.InjectService;
+
 import com.guangbo.chen.dao.ProductJpaDAO;
 import com.guangbo.chen.dao.ProductJpaImple;
 import com.guangbo.chen.jpa.Product;
@@ -13,36 +17,35 @@ import com.guangbo.chen.jpa.Product;
  * Session Bean implementation class ProductEjbDao
  */
 @Stateless(name = "productEjb", mappedName = "ejb/product")
-public class ProductEjbDao implements ProductDAO, ProductDAOLocal {
+public class ProductBean implements ProductBeanRemote, ProductBeanLocal {
 	@PersistenceContext
 	private EntityManager em;
 	private ProductJpaDAO pdao;
+	
+	@PostConstruct
+	public void init()
+	{
+		pdao = new ProductJpaImple(em);
+	}
 
 	@Override
 	public List<Product> findAll() {
-		pdao = new ProductJpaImple(em);
 		return pdao.findAll();
 	}
 
 	@Override
 	public List<Product> findAllByPagination(int offset, int noOfRecords) {
-		pdao = new ProductJpaImple(em);
-		List<Product> products = pdao.findAllByPagination(offset, noOfRecords);
-		return products;
+		return pdao.findAllByPagination(offset, noOfRecords);
 	}
 
 	@Override
 	public List<Product> findAllByCategory(String category) {
-		pdao = new ProductJpaImple(em);
-		List<Product> products = pdao.findAllByCategory(category);
-		return products;
+		return pdao.findAllByCategory(category);
 	}
 
 	@Override
 	public List<Product> findAllCategoryByPagination(String category, int offset, int noOfRecords) {
-		pdao = new ProductJpaImple(em);
-		List<Product> products = pdao.findAllCategoryByPagination(category, offset, noOfRecords);
-		return products;
+		return pdao.findAllCategoryByPagination(category, offset, noOfRecords);
 	}
 	
 	/**
@@ -51,9 +54,7 @@ public class ProductEjbDao implements ProductDAO, ProductDAOLocal {
 	 */
 	@Override
 	public List<String> findAllCategory() {
-		pdao = new ProductJpaImple(em);
-		List<String> categoryList = pdao.findAllCategory();
-		return categoryList;
+		return pdao.findAllCategory();
 	}
 
 }

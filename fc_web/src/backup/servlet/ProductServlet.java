@@ -9,13 +9,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import com.guangbo.chen.ejb.ProductDAO;
+import com.guangbo.chen.ejb.ProductBeanRemote;
 import com.guangbo.chen.jpa.Orderline;
 import com.guangbo.chen.jpa.Product;
 
 public class ProductServlet extends HttpServlet {
 	@EJB (name="productEjb",mappedName="ejb/product")
-	private ProductDAO pdao; 
+	private ProductBeanRemote pdao; 
 	private final static int recordsPerPage = 8;
 	private int page;
 	private int noOfRecords;

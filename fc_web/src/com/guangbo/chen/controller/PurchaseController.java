@@ -4,39 +4,40 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import javax.annotation.PostConstruct;
+import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
+import com.guangbo.chen.ejb.OrderBeanRemote;
 import com.guangbo.chen.index.action.IndexAction;
+import com.guangbo.chen.purchase.action.ProcessPurchaseAction;
+import com.guangbo.chen.purchase.action.PurchaseAction;
 
 /**
- * Servlet implementation class IndexServlet
- * this class handles index request and forwards relevant responses
+ * Servlet implementation class PurchaseController
  */
-public class IndexController extends HttpServlet 
-{
+public class PurchaseController extends HttpServlet {
+	@EJB(name = "OrderEjb", mappedName = "ejb/order")
+	private OrderBeanRemote obean;
 	private Map<String,Action> actions;
 	
+	
 	@PostConstruct
-	public void init() {
+    public void init() {
 		actions = new HashMap<String,Action>();
 		actions.put("index", new IndexAction());
+		actions.put("purchase", new PurchaseAction());
+		actions.put("process", new ProcessPurchaseAction(obean));
 		//set default action to index page
 		actions.put(null, actions.get("index"));
-	}
-	
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
-	{
+    }
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doPost(request, response);
 	}
 
-	/**
-	 * this method handles index post requests
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
-	{
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try
 		{
 			Action action = actions.get(request.getParameter("action"));

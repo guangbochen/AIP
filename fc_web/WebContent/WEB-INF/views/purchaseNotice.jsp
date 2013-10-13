@@ -10,18 +10,21 @@
     <link rel="stylesheet" type="text/css" href="assets/style.css">
 </head>
 <body>
+<!-- import page header -->
+<%@ include file="header.jsp" %>
 
-    <div class="topPadding">
-    <div class="container">
+    <div class="container body-wrapper">
+    <div class="topPadding"></div>
     	<!-- displays success processing info for customer -->
         <div class="alert alert-success notice">
-        <h2>Dear Customer, You have paid your order successfully !</h2>
-        <h3>Your Ordering Number is : ${orderNumber }</h3>
+        <h2>Dear ${name}, You have paid your order successfully !</h2>
+        <h3>Your ordering number is : ${orderNumber } </h3>
         <p><a class="btn btn-lg btn-info" href="index"> Close it</a></p>
       </div>
     </div>
-	</div> <!-- end of body container -->
 	
 	
+<!-- import page footer -->
+<%@ include file="footer.jsp" %>
 </body>
 </html>

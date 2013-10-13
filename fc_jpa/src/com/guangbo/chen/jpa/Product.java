@@ -13,7 +13,7 @@ import javax.persistence.Table;
 @NamedQueries({
 	@NamedQuery(name = "product.findAll", query = "Select p From Product p"),
 	@NamedQuery(name = "product.findAllCategory", query = "Select p.category From Product p Group By p.category"),
-	@NamedQuery(name = "product.findAllByCategory", query = "SELECT p FROM Product p WHERE p.category LIKE ?1")
+	@NamedQuery(name = "product.findAllByCategory", query = "SELECT p FROM Product p WHERE p.category LIKE ?1"),
 })
 @Entity
 @Table(name="products")

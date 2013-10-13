@@ -39,7 +39,7 @@
 	            <td>
 			        <form method="POST" action="orders?action=update">
 		            <input type="hidden" name="pid" value="${ol.product.id }" /> 
-		            <input type="input" name="quantity" value="${ol.quantity }" class="myQuantity"/> 
+		            <input type="input" name="quantity" value="${ol.quantity }" class="myQuantity" maxlength="6"/> 
 		            <input type="submit" value="Update" class="btn btn-warning"/> 
 	            	</form>
 	            </td>
