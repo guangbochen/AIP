@@ -2,8 +2,10 @@ package com.guangbo.chen.dao;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+
 import com.guangbo.chen.jpa.Order;
 import com.guangbo.chen.jpa.Orderline;
 
@@ -11,17 +13,11 @@ import com.guangbo.chen.jpa.Orderline;
  * Session Bean implementation class OrderEjbDao
  */
 public class OrderJpaImpl implements OrderJpaDAO{
-	@PersistenceContext
 	private EntityManager em;
 	private final static String defaultStatus = "ORDERED";
 	private final static String prefixOfUniqueId = "guchen";
 	private static String orderNumber = null;
 
-	/**
-	 * default constructor
-	 */
-    public OrderJpaImpl() { 
-    }
 
 	/**
 	 *  special ejb3 constructor to set the entity manager.
@@ -37,13 +33,13 @@ public class OrderJpaImpl implements OrderJpaDAO{
     }
     
 	@Override
-	public void addOrder(ArrayList<Orderline> orderlines, Order order) {
+	public void addOrder(List<Orderline> orderlines, Order order) {
 		try
 		{
 			//insert customer order and associated orderlines into the database
 			order.setOrderNumber(generateOrderNum());
 			order.setStatus(defaultStatus);
-			order.setOrderLines(orderlines);
+			order.setOrderlines(orderlines);
 			em.persist(order);
 			for(Orderline ol : orderlines)
 			{
@@ -125,5 +121,50 @@ public class OrderJpaImpl implements OrderJpaDAO{
 			}
 		}
 		return grandTotal;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Order> findOutstandingOrders() {
+		List<Order> orders = new ArrayList<Order>();
+		try {
+			orders = em.createNamedQuery("order.findOutstandingOrders")
+					.setParameter(1, "ORDERED")
+					.setParameter(2, "PAID")
+					.getResultList();
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		return orders;
+	}
+
+	@Override
+	public Order findOrderByOrderNumber(String orderNumber) {
+		Order order = new Order();
+		try {
+			order = (Order) em.createNamedQuery("order.findOrderByOrderNum")
+					.setParameter(1, orderNumber)
+					.getSingleResult();
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+		return order;
+	}
+
+	@Override
+	public void updateOrderStatus(String orderNumber, String status) {
+		try {
+			Order order = (Order) em.createNamedQuery("order.findOrderByOrderNum")
+					.setParameter(1, orderNumber)
+					.getSingleResult();
+			order.setStatus(status);
+			em.merge(order);
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
 	}
 }

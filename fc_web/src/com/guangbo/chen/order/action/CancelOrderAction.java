@@ -1,29 +1,27 @@
 package com.guangbo.chen.order.action;
 
-import java.util.ArrayList;
-
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-
 import com.guangbo.chen.controller.Action;
 import com.guangbo.chen.controller.Dispatcher;
-import com.guangbo.chen.jpa.Orderline;
+import com.guangbo.chen.ejb.CartBeanRemote;
 
 public class CancelOrderAction implements Action {
-
+	private CartBeanRemote cartBean;
+	
 	@Override
 	public Dispatcher execute(HttpServletRequest request) {
-		ArrayList<Orderline> orderList= new ArrayList<Orderline>();
-		HttpSession sess = request.getSession();
-		orderList = (ArrayList<Orderline>) sess.getAttribute("shoppingCart");
-		//erase shopping cart
-		sess.setAttribute("shoppingCart", null);
-		orderList = null;
+		
+		//find stateful cart session bean
+		cartBean = (CartBeanRemote) request.getSession().getAttribute("cartBean");
+		
+		//erase cart session bean
+		request.getSession().setAttribute("cartBean", null);
+		
 		//update the grand Total and empty shopping cart
-		double grandTotal = 0.0;
-		request.setAttribute("grandTotal", grandTotal);
-        request.setAttribute("shoppingCart", orderList);
+		request.setAttribute("grandTotal", 0.0);
+        request.setAttribute("shoppingCart", null);
 		return new Dispatcher.Forward("orders.jsp");
+		
 	}
 
 }

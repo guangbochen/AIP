@@ -4,18 +4,18 @@ import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import com.guangbo.chen.controller.Action;
 import com.guangbo.chen.controller.Dispatcher;
-import com.guangbo.chen.ejb.ProductDAO;
+import com.guangbo.chen.ejb.ProductBeanRemote;
 import com.guangbo.chen.jpa.Product;
 
 public class ProductsAction implements Action{
-	private ProductDAO pdao;
+	private ProductBeanRemote pdao;
 	private final static int recordsPerPage = 8;
 	private int page;
 	private int noOfRecords;
 	private int noOfPages;
 	private ArrayList<Product> productList;
 	
-	public ProductsAction(ProductDAO pdao) {
+	public ProductsAction(ProductBeanRemote pdao) {
 		this.pdao = pdao;
 	}
 

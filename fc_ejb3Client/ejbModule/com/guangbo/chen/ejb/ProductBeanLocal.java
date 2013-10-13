@@ -8,7 +8,7 @@ import javax.persistence.EntityManager;
 import com.guangbo.chen.jpa.Product;
 
 @Local
-public interface ProductDAOLocal {
+public interface ProductBeanLocal {
 	//searching products
 	public List<Product> findAll();
 	public List<Product> findAllByPagination(int offset, int noOfRecords);

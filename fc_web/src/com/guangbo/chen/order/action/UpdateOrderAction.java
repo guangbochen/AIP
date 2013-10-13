@@ -1,46 +1,39 @@
 package com.guangbo.chen.order.action;
 
-import java.util.ArrayList;
-
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-
 import com.guangbo.chen.controller.Action;
 import com.guangbo.chen.controller.Dispatcher;
-import com.guangbo.chen.ejb.OrderDAO;
-import com.guangbo.chen.jpa.Orderline;
+import com.guangbo.chen.ejb.CartBeanRemote;
 
 public class UpdateOrderAction implements Action {
-	private OrderDAO odao;
-
+	private CartBeanRemote cartBean;
+	
 	@Override
 	public Dispatcher execute(HttpServletRequest request) {
-		ArrayList<Orderline> orderList= new ArrayList<Orderline>();
-		HttpSession sess = request.getSession();
-		orderList = (ArrayList<Orderline>) sess.getAttribute("shoppingCart");
-		try
+		
+		//find stateful cart session bean
+		cartBean = (CartBeanRemote) request.getSession().getAttribute("cartBean");
+		
+		if(cartBean != null)
 		{
-			int pid = Integer.parseInt(request.getParameter("pid"));
-			int quantity = Integer.parseInt(request.getParameter("quantity"));
-			for(Orderline ol : orderList)
+			try
 			{
-				//update quantity & line total of the order upon product id
-				if(ol.getProduct().getId() == pid && quantity >0)
-				{
-					double price = ol.getProduct().getPrice();
-					ol.setQuantity(quantity);
-					ol.setLineTotal(price*quantity);
-				}
+				int pid = Integer.parseInt(request.getParameter("pid"));
+				int quantity = Integer.parseInt(request.getParameter("quantity"));
+				//validate input quantity should be greater than 1
+				if(quantity >0) cartBean.updateOrder(quantity, pid);
 			}
-			//update the grand Total
-			double grandTotal = odao.getGrandTotal(orderList);
-			request.setAttribute("grandTotal", grandTotal);
-	        request.setAttribute("shoppingCart", orderList);		
-	    }
-		catch(Exception e)
-		{
-			e.printStackTrace();
+			catch(Exception e)
+			{
+				e.printStackTrace();
+			}
+			
 		}
+		
+		//update the order list and granTotal
+        request.setAttribute("shoppingCart", cartBean.getOrderList() );
+		request.setAttribute("grandTotal", cartBean.getGrandTotal());
+        
 		return new Dispatcher.Forward("orders.jsp");
 	}
 

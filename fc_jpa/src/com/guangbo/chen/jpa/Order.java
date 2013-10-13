@@ -20,7 +20,9 @@ import javax.persistence.NamedQuery;
 
 @NamedQueries({
 	@NamedQuery(name = "order.getUniqueNum", query = "Select MAX(o.id) From Order o"),
-	@NamedQuery(name = "order.viewOrder", query = "Select o From Order o Where o.orderNumber Like ?1 And o.surname Like ?2")
+	@NamedQuery(name = "order.viewOrder", query = "Select o From Order o Where o.orderNumber Like ?1 And o.surname Like ?2"),
+	@NamedQuery(name = "order.findOutstandingOrders", query = "Select o From Order o Where o.status Like ?1 Or o.status Like ?2"),
+	@NamedQuery(name = "order.findOrderByOrderNum", query = "Select o From Order o Where o.orderNumber Like ?1"),
 })
 @Entity
 @Table(name="orders", uniqueConstraints = {
@@ -282,19 +284,14 @@ public class Order implements Serializable{
 		this.status = status;
 	}
 	
-	/**
-	 * @return the list
-	 */
+	
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "order")
-	public List<Orderline> getOrderLines() {
+	public List<Orderline> getOrderlines() {
 		return orderlines;
 	}
 
-	/**
-	 * @param list the list to set
-	 */
-	public void setOrderLines(List<Orderline> orderline) {
-		this.orderlines = orderline;
+	public void setOrderlines(List<Orderline> orderlines) {
+		this.orderlines = orderlines;
 	}
 
 	/**

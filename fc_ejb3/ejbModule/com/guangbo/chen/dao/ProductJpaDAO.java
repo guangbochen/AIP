@@ -6,7 +6,7 @@ import com.guangbo.chen.jpa.Product;
 
 public interface ProductJpaDAO {
 
-	//searching products
+	//Basic searching facets
 	public List<Product> findAll();
 	public List<Product> findAllByPagination(int offset, int noOfRecords);
 	public List<Product> findAllByCategory(String category);
