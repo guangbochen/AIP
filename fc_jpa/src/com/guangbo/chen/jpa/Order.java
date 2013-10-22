@@ -23,6 +23,7 @@ import javax.persistence.NamedQuery;
 	@NamedQuery(name = "order.viewOrder", query = "Select o From Order o Where o.orderNumber Like ?1 And o.surname Like ?2"),
 	@NamedQuery(name = "order.findOutstandingOrders", query = "Select o From Order o Where o.status Like ?1 Or o.status Like ?2"),
 	@NamedQuery(name = "order.findOrderByOrderNum", query = "Select o From Order o Where o.orderNumber Like ?1"),
+	@NamedQuery(name = "order.findPaidOrders", query = "Select o From Order o Where o.status Like ?1"),
 })
 @Entity
 @Table(name="orders", uniqueConstraints = {

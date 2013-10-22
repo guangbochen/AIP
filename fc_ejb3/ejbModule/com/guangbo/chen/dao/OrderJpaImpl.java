@@ -18,7 +18,6 @@ public class OrderJpaImpl implements OrderJpaDAO{
 	private final static String prefixOfUniqueId = "guchen";
 	private static String orderNumber = null;
 
-
 	/**
 	 *  special ejb3 constructor to set the entity manager.
 	 */
@@ -166,5 +165,43 @@ public class OrderJpaImpl implements OrderJpaDAO{
 		catch(Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Order> findPaidOrders() {
+		List<Order> orders = new ArrayList<Order>();
+		try
+		{
+			orders = em.createNamedQuery("order.findPaidOrders")
+					.setParameter(1, "PAID")
+					.getResultList();
+			
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		return orders;
+	}
+
+	@Override
+	public boolean updatePaidOrder(String orderNumber, String status) {
+		
+		try {
+			//if status is not set as "SENT", terminate updating and return false
+			if(!status.equals("SENT")) return false;
+			
+			//update order to status "SENT" according to order number
+			Order order = (Order) em.createNamedQuery("order.findOrderByOrderNum")
+					.setParameter(1, orderNumber)
+					.getSingleResult();
+			order.setStatus(status);
+			em.merge(order);
+			return true;
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		return false;
 	}
 }

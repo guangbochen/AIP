@@ -58,7 +58,7 @@
     <description></description>
     <display-name>AdminController</display-name>
     <servlet-name>AdminController</servlet-name>
-    <servlet-class>com.guangbo.chen.admin.controller.AdminController</servlet-class>
+    <servlet-class>com.guangbo.chen.controller.AdminController</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>AdminController</servlet-name>

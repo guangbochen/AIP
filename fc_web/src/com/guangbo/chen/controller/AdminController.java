@@ -1,4 +1,4 @@
-package com.guangbo.chen.admin.controller;
+package com.guangbo.chen.controller;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -14,7 +14,6 @@ import javax.servlet.http.HttpServletResponse;
 import com.guangbo.chen.admin.action.CheckOutstandingOrderAction;
 import com.guangbo.chen.admin.action.OutstandingOrderAction;
 import com.guangbo.chen.admin.action.UpdateOutstandingOrderAction;
-import com.guangbo.chen.controller.Action;
 import com.guangbo.chen.ejb.OrderBeanRemote;
 
 /**

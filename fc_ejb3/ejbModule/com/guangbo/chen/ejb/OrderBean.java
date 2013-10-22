@@ -72,4 +72,14 @@ public class OrderBean implements OrderBeanRemote, OrderBeanLocal {
 		odao.updateOrderStatus(orderNumber, status);
 	}
 
+	@Override
+	public List<Order> findPaidOrders() {
+		return odao.findPaidOrders();
+	}
+
+	@Override
+	public boolean updatePaidOrder(String orderNumber, String status) {
+		return odao.updatePaidOrder(orderNumber, status);
+	}
+
 }

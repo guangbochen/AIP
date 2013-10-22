@@ -22,7 +22,8 @@ public class UpdateOutstandingOrderAction implements Action{
 			if(!orderNumber.equals("") && !status.equals(""))
 			{
 				oBean.updateOrderStatus(orderNumber, status);
-				request.setAttribute("updateSuccess", "You have update " + orderNumber +" status to "+ status +" successfully. ");
+				request.setAttribute("updateSuccess", "You have update '" +
+						orderNumber +"' status to '"+ status +"' successfully. ");
 			}
 		}
 		catch(Exception e)
