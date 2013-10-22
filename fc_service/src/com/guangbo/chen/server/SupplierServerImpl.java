@@ -23,7 +23,8 @@ public class SupplierServerImpl implements SupplierServer {
 
 	@Override
 	public List<PaidOrder> listPaidOrders() {
-		return getPaidOrders();
+		paidOrders = getPaidOrders();
+		return paidOrders;
 	}
 
 	@Override
@@ -62,7 +63,7 @@ public class SupplierServerImpl implements SupplierServer {
 				paidOrders.add(po);
 			}
 		}
-		return null;
+		return paidOrders;
 	}
 	
 	/**

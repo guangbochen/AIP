@@ -189,7 +189,7 @@ public class OrderJpaImpl implements OrderJpaDAO{
 		
 		try {
 			//if status is not set as "SENT", terminate updating and return false
-			if(!status.equals("SENT")) return false;
+			if(!status.equals("SENT") || orderNumber.equals("")) return false;
 			
 			//update order to status "SENT" according to order number
 			Order order = (Order) em.createNamedQuery("order.findOrderByOrderNum")
