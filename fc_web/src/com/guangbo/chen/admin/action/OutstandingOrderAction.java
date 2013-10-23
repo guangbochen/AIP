@@ -21,6 +21,8 @@ public class OutstandingOrderAction implements Action{
 		
 		List<Order> orders = oBean.findOutstandingOrders();
 		request.setAttribute("orders", orders);
+		String user = request.getRemoteUser();
+		request.setAttribute("user", user);
 		return new Dispatcher.Forward("admin/admin.jsp");
 	}
 	

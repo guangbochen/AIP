@@ -4,6 +4,30 @@
   <welcome-file-list>
     <welcome-file>index</welcome-file>
   </welcome-file-list>
+  
+  <security-constraint>
+    <web-resource-collection>
+      <web-resource-name>fc_web</web-resource-name>
+      <description>The fc_sportsware web application</description>
+       <url-pattern>/admin</url-pattern>
+    </web-resource-collection>
+
+    <auth-constraint>
+      <description>Only fc_sportsware's admin can use those JSP pages</description>
+      <role-name>fc_Admin</role-name>
+    </auth-constraint>
+  </security-constraint>
+
+  <login-config>
+    <auth-method>BASIC</auth-method>
+    <realm-name>fc_sportsWare Admin</realm-name>
+  </login-config>
+
+  <security-role>
+    <description>fc_sportsWare admin user</description>
+    <role-name>fc_Admin</role-name>
+  </security-role>
+  
   <servlet>
     <description></description>
     <display-name>IndexController</display-name>

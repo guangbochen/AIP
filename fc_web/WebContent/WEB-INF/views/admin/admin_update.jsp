@@ -131,8 +131,17 @@
 		    	</tr>
 	    	</table>
     	</c:if>
+    	
+	   	<!-- displays message if order is not found -->
+	   	<c:if test="${empty order}">
+	   	<h2><span class="glyphicon glyphicon-search"></span> Searching Result :</h2>	
+	   	<p> Not relevant searching result is provided ${result} ....</p>
+	   	
+	   	</c:if>
 	</div>
 	
+   	
+   	
 	<!-- end of container -->
 	<%@ include file="footer.jsp" %>
 </body>

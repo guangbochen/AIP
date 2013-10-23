@@ -30,6 +30,8 @@ public class UpdateOutstandingOrderAction implements Action{
 		{
 			e.printStackTrace();
 		}
+		String user = request.getRemoteUser();
+		request.setAttribute("user", user);
 		return new Dispatcher.Forward("admin/updateNotice.jsp");
 	}
 
