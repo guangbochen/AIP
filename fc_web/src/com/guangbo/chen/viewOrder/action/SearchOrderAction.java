@@ -10,10 +10,18 @@ import com.guangbo.chen.ejb.OrderBeanRemote;
 import com.guangbo.chen.jpa.Order;
 import com.guangbo.chen.jpa.Orderline;
 
-public class CheckViewOrderAction implements Action{
+/**
+ * This class implements action interface,
+ * it
+ */
+public class SearchOrderAction implements Action{
 	private OrderBeanRemote oBean;
 	
-	public CheckViewOrderAction(OrderBeanRemote oBean) {
+	/**
+	 * EJB constructor to set the EJB bean
+	 * @param oBean
+	 */
+	public SearchOrderAction(OrderBeanRemote oBean) {
 		this.oBean = oBean;
 	}
 
@@ -35,6 +43,7 @@ public class CheckViewOrderAction implements Action{
 		{
 			Order order = oBean.findOrderByOrderNumAndSurname(number, name);
 			List<Orderline> ols = (List<Orderline>) order.getOrderlines();
+			if(ols == null) request.setAttribute("message", " Invalid order number or surname");
 			double grandTotal = oBean.getGrandTotal(ols);
 			request.setAttribute("order", order);
 			request.setAttribute("orderlines", ols);

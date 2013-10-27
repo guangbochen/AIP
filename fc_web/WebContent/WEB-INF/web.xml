@@ -5,27 +5,31 @@
     <welcome-file>index</welcome-file>
   </welcome-file-list>
   
+  <!-- Admin authentication -->
+  <login-config>
+    <auth-method>BASIC</auth-method>
+    <realm-name>myrealm</realm-name>
+  </login-config>
+  
   <security-constraint>
     <web-resource-collection>
-      <web-resource-name>fc_web</web-resource-name>
-      <description>The fc_sportsware web application</description>
-       <url-pattern>/admin</url-pattern>
+      <web-resource-name>fc_admin resource</web-resource-name>
+      <url-pattern>/admin</url-pattern>
     </web-resource-collection>
 
     <auth-constraint>
-      <description>Only fc_sportsware's admin can use those JSP pages</description>
-      <role-name>fc_Admin</role-name>
+      <description>Only fc admin can access /admin url pattern </description>
+      <role-name>orders</role-name>
     </auth-constraint>
+    
+    <user-data-constraint>
+	  <transport-guarantee>CONFIDENTIAL</transport-guarantee>
+  	</user-data-constraint>
   </security-constraint>
-
-  <login-config>
-    <auth-method>BASIC</auth-method>
-    <realm-name>fc_sportsWare Admin</realm-name>
-  </login-config>
 
   <security-role>
     <description>fc_sportsWare admin user</description>
-    <role-name>fc_Admin</role-name>
+    <role-name>orders</role-name>
   </security-role>
   
   <servlet>

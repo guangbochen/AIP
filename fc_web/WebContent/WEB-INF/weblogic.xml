@@ -3,7 +3,7 @@
     <wls:weblogic-version>10.3.6</wls:weblogic-version>
     <wls:context-root>fc_web</wls:context-root>
     <wls:security-role-assignment>
-	    <wls:role-name>fc_Admin</wls:role-name>
+	    <wls:role-name>orders</wls:role-name>
 	    <wls:principal-name>fc_Admin</wls:principal-name>
 	</wls:security-role-assignment>
 </wls:weblogic-web-app>

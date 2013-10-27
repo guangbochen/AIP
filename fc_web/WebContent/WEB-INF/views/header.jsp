@@ -12,7 +12,7 @@
            </ul>
        <div class="nav navbar-nav navbar-right">
           	<a href="admin">
-            <button class="btn btn-primary pull-right login_button" type="submit">Log in</button>
+            <button class="btn btn-warning pull-right login_button" type="submit">Log in</button>
             </a>
        </div>
      </div>

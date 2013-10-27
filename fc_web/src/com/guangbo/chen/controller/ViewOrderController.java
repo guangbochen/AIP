@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.guangbo.chen.ejb.OrderBeanRemote;
-import com.guangbo.chen.viewOrder.action.CheckViewOrderAction;
+import com.guangbo.chen.viewOrder.action.SearchOrderAction;
 import com.guangbo.chen.viewOrder.action.ViewOrderAction;
 
 /**
@@ -27,7 +27,7 @@ public class ViewOrderController extends HttpServlet {
     public void init() {
 		actions = new HashMap<String,Action>();
 		actions.put("default", new ViewOrderAction());
-		actions.put("check", new CheckViewOrderAction(oBean));
+		actions.put("check", new SearchOrderAction(oBean));
 		actions.put(null, actions.get("default"));
     }
 	

@@ -24,7 +24,7 @@
 		</c:otherwise>
 	</c:choose>
     <hr>
-    
+
 	<div class="p_filter">
 		<!--Shows the Shopping cart -->
 	    <div class="panel panel-success pull-right p_cart">
@@ -45,7 +45,7 @@
 					<option value="${cate}" >${cate}</option>
 			  	</c:forEach>
 			</select>
-			<input class="btn btn-default" type="submit" value="Fetch">
+			<input class="btn btn-default" type="submit" value="Search">
 		</form>
 		</div> 
 	</div>

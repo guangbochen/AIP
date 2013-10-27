@@ -12,6 +12,7 @@ import com.guangbo.chen.jpa.Order;
 public class OutstandingOrderAction implements Action{
 	private OrderBeanRemote oBean;
 	private double grandTotal;
+	
 	public OutstandingOrderAction(OrderBeanRemote oBean) {
 		this.oBean = oBean;
 	}

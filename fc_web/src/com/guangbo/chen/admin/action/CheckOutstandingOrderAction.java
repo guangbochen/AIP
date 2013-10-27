@@ -9,6 +9,7 @@ import com.guangbo.chen.jpa.Order;
 
 public class CheckOutstandingOrderAction implements Action {
 	private OrderBeanRemote oBean;
+	private String orderNumber;
 	
 	public CheckOutstandingOrderAction(OrderBeanRemote oBean) {
 		this.oBean = oBean;
@@ -17,7 +18,7 @@ public class CheckOutstandingOrderAction implements Action {
 	@Override
 	public Dispatcher execute(HttpServletRequest request) {
 		try{
-			String orderNumber = request.getParameter("nu");
+			orderNumber = request.getParameter("nu");
 			if(orderNumber.equals(""))
 			{
 				request.setAttribute("isempty", " Empty");
@@ -26,6 +27,7 @@ public class CheckOutstandingOrderAction implements Action {
 			else
 			{
 				Order order = oBean.findOrderByOrderNumber(orderNumber);
+				if(order == null) request.setAttribute("message", " Invalid order number '"+ orderNumber +"'");
 				request.setAttribute("order", order);
 			}
 		}
@@ -33,8 +35,11 @@ public class CheckOutstandingOrderAction implements Action {
 		{
 			e.printStackTrace();
 		}
+		
+		//display login user name
 		String user = request.getRemoteUser();
 		request.setAttribute("user", user);
+		
 		return new Dispatcher.Forward("admin/admin_update.jsp");
 	}
 

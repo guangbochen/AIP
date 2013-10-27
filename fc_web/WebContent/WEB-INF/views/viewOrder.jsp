@@ -28,6 +28,7 @@
           <div class="panel-body">
     		<!-- displays the searching form for checking the value -->
 		    <h4>Please fill in the searching details </h4> <br>
+		    <p class="error-message">${message }</p>
     		<form method="post" action="viewOrder?action=check">
     			<div class="${error }">
 	    			<label class="control-label"> Order Number :</label>
@@ -51,8 +52,8 @@
 			  	<strong> Dear [ ${order.givenName } ${order.surname } ]: the ordering details for your order "${order.orderNumber}" is shown as below... </strong>
 			  </p>
 			  
-		  	<table class="table table-bordered">
-			  	<tr class="active">
+		  	<table class="table table-bordered table-striped">
+			  	<tr class="warning">
 		            <th>Product</th>
 		            <th>Category</th>
 		            <th>Code</th>

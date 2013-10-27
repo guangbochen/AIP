@@ -35,15 +35,14 @@ public class CategoryAction implements Action{
 		String category = request.getParameter("category");
 		if(category.equals("All"))
 		{
-			noOfRecords = pdao.findAll().size();
-			page = getPage(request, noOfRecords);
-			productList = (ArrayList<Product>) pdao.findAllByPagination((page-1)*recordsPerPage,recordsPerPage);
+			return new Dispatcher.Redirect("products");
 		}
 		else
 		{
 			//get a list product categories for category filter
 			//displays all of the products
 			noOfRecords = pdao.findAllByCategory(category).size();
+			if(noOfRecords == 0) return new Dispatcher.Redirect("products");
 			page = getPage(request, noOfRecords);
 			productList = (ArrayList<Product>) pdao.findAllCategoryByPagination(category,(page-1)*recordsPerPage,recordsPerPage);
 		}

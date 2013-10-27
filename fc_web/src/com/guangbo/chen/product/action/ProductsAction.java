@@ -19,7 +19,6 @@ public class ProductsAction implements Action{
 		this.pdao = pdao;
 	}
 
-
 	@Override
 	public Dispatcher execute(HttpServletRequest request) {
 		//initialize variables

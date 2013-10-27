@@ -28,7 +28,7 @@ public abstract class Dispatcher {
 	/**
 	 * This dispatcher redirects to a given url.
 	 */
-	public class Redirect extends Dispatcher {
+	public static class Redirect extends Dispatcher {
 		private String url;
 
 		public Redirect(String url) {

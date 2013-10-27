@@ -21,7 +21,7 @@
     	
     	<h3>Outstanding Orders:</h3> <br>
     	<!-- displays outstanding orders -->
-    	<table class="table table-bordered table-hover">
+    	<table class="table table-bordered table-striped">
     		<tr class="warning">
     		<th>Order Number</th>
     		<th>Surname</th>

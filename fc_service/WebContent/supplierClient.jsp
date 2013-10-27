@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html" import="server.chen.guangbo.com.*, java.util.*" %>
+<%@ page language="java" contentType="text/html" import="server.chen.guangbo.com.*, java.util.*, javax.xml.ws.BindingProvider" %>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -8,14 +8,50 @@
 <title>Supplier Service Client</title>
 </head>
 <body>
-<%! List<PaidOrder> orders; %>
+
 <%
+//get username and password
+String message="", username="", password="";
+List<PaidOrder> orders = null;
+username = request.getParameter("username");
+password = request.getParameter("password");
+
+HttpSession sess = request.getSession();
+if(username != null || password != null) {
+	session.setAttribute("username", username );
+	session.setAttribute("password", password );
+}
+else{
+	username = (String)session.getAttribute("username");
+	password = (String)session.getAttribute("password");
+}
+
+
+//Access supplier web service with BASIC authentication
 SupplierServerService spc = new SupplierServerService();
 SupplierServer sc = spc.getSupplierServerPort();
-orders = sc.listOrders();
+((BindingProvider) sc).getRequestContext().put(BindingProvider.USERNAME_PROPERTY, username);
+((BindingProvider) sc).getRequestContext().put(BindingProvider.PASSWORD_PROPERTY, password);
+
+
+try {
+	if(sc.isAuthorised() == true) 
+	{
+		message = "welcome, " + username;
+		orders = sc.listOrders();
+	}
+}
+catch(Exception e) {
+	message = e.getMessage();
+}
 %>
 
 <h1>Supplier Service Client</h1>
+
+<p><%=message %></p>
+<p>Click <a href="index.jsp">here</a> to go back.</p>
+
+<% if(orders != null){ %>
 	<h2>List of PAID Orders</h2>
 	<table border="1" cellpadding="8">
 		<tbody>
@@ -47,5 +83,6 @@ orders = sc.listOrders();
 		<input type="text" name="status">
 		<input type="submit" value="Submit">
 	</form>
+<% }%>
 </body>
 </html>

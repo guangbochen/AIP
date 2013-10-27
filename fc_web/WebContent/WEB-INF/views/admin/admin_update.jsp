@@ -31,6 +31,7 @@
 	    	</div><!-- /input-group -->
 	  	</div><!-- /.col-lg-6 -->
 		</form>
+		<p class="error-message"> ${message }</p>
     	
     	<!-- displays order details and orderlines -->
     	<c:if test="${not empty order}">
@@ -40,7 +41,7 @@
 		        <h3 class="panel-title"><strong>Order Details :</strong></h3>
 		        </div>
 		        <div class="panel-body">
-			        <table class="table">
+			        <table class="table table-striped">
 			        	<tr>
 			        		<td>Order Number : </td>
 			        		<td>${order.orderNumber }</td>
@@ -102,7 +103,7 @@
     		<!-- shows all orderlines -->
 	    	<h4>Customer [${order.givenName } ${order.surname }] has following orderlines for order "${order.orderNumber}" :</h4>
 	    	<span class="sr-only">99% Complete</span>
-	    	<table class="table table-condensed">
+	    	<table class="table table-condensed table-striped">
 	    		<tr class="warning">
 	    		<th>Category</th>
 	    		<th>Code</th>
@@ -135,12 +136,9 @@
 	   	<!-- displays message if order is not found -->
 	   	<c:if test="${empty order}">
 	   	<h2><span class="glyphicon glyphicon-search"></span> Searching Result :</h2>	
-	   	<p> Not relevant searching result is provided ${result} ....</p>
-	   	
+	   	<p> Not relevant searching result is provided ....</p>
 	   	</c:if>
 	</div>
-	
-   	
    	
 	<!-- end of container -->
 	<%@ include file="footer.jsp" %>

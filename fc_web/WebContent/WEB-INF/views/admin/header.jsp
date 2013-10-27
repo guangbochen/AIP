@@ -6,7 +6,7 @@
 	           <a class="navbar-brand admin-brand" href="admin"><span class="glyphicon glyphicon-user"></span> FC Sportsware Admin</a>
 	       </div>
 	       
-	       <div class="pull-right admin-user">Welcome, ${user }</div>
+	       <div class="pull-right admin-user"><strong>Welcome, ${user }</strong></div>
 	       <ul class="nav navbar-nav"> <br>
 	           <li><a href="admin">View Outstanding Order</a></li>
 	           <li><a href="admin?action=check">Update Order</a></li>

@@ -4,6 +4,13 @@
 	min-height: 800px;
 }
 
+.error-message
+{
+	color: red;
+	font-weight: 600;
+	font-size: 16px;
+}
+
 /* css for the navigation bar */
 .navbar-nav>li>a:hover {
     background-color: #2C2C2C !important;
@@ -156,7 +163,7 @@
 .admin-brand 
 {
 	font-size: 20px;
-	color: #47B224 !important;
+	color: #3276B1 !important;
 	font-weight: 700;
 }
 

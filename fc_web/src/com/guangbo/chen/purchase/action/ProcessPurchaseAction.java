@@ -43,7 +43,7 @@ public class ProcessPurchaseAction implements Action{
 		}
 		else
 		{
-			return new Dispatcher.Forward("error.jsp");
+			return new Dispatcher.Redirect("index");
 		}
 		
 	}
