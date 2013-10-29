@@ -7,6 +7,10 @@ import javax.persistence.EntityManager;
 
 import com.guangbo.chen.jpa.Product;
 
+/**
+ * this is remote interface for Product EJB bean
+ * @author guangbo
+ */
 @Remote
 public interface ProductBeanRemote {
 

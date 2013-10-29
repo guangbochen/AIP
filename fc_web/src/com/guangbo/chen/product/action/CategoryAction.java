@@ -10,6 +10,10 @@ import com.guangbo.chen.controller.Dispatcher;
 import com.guangbo.chen.ejb.ProductBeanRemote;
 import com.guangbo.chen.jpa.Product;
 
+/**
+ * this class handles HTTP request from the products page
+ * @author guangbo
+ */
 public class CategoryAction implements Action{
 	private ProductBeanRemote pdao;
 	private final static int recordsPerPage = 8;
@@ -19,10 +23,19 @@ public class CategoryAction implements Action{
 	private ArrayList<Product> productList;
 	
 	
+	/**
+	 * constructor to inject the product EJB bean
+	 * @param oBean, Order EJB bean
+	 */
 	public CategoryAction(ProductBeanRemote pdao) {
 		this.pdao = pdao;
 	}
 	
+	/**
+	 * this method returns a list of products by category in pagination
+	 * @param request, HttpServreletRequest
+	 * @return Dispatcher, Dispatcher forwarding to the products page
+	 */
 	@Override
 	public Dispatcher execute(HttpServletRequest request) {
 		
@@ -59,6 +72,12 @@ public class CategoryAction implements Action{
 		return new Dispatcher.Forward("products.jsp");
 	}
 	
+	/**
+	 * this method returns the current page number that user is in
+	 * @param request, HttpServletRequest
+	 * @param maxPage, int max page number
+	 * @return page, int page number
+	 */
 	private int getPage(HttpServletRequest request, int maxPage)
 	{
 		int page = 1;

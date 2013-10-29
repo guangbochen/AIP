@@ -1,12 +1,7 @@
 package com.guangbo.chen.jpa;
 
-import static javax.persistence.GenerationType.IDENTITY;
-
 import java.io.Serializable;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -17,7 +12,13 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.persistence.NamedQuery;
+import static javax.persistence.GenerationType.IDENTITY;
 
+
+/**
+ * this class is java Entity bean that is corresponds to the orders table
+ * @author guangbo
+ */
 @NamedQueries({
 	@NamedQuery(name = "order.getUniqueNum", query = "Select MAX(o.id) From Order o"),
 	@NamedQuery(name = "order.viewOrder", query = "Select o From Order o Where o.orderNumber Like ?1 And o.surname Like ?2"),
@@ -26,8 +27,7 @@ import javax.persistence.NamedQuery;
 	@NamedQuery(name = "order.findPaidOrders", query = "Select o From Order o Where o.status Like ?1"),
 })
 @Entity
-@Table(name="orders", uniqueConstraints = {
-		@UniqueConstraint(columnNames = "orderNumber")})
+@Table(name="orders", uniqueConstraints = { @UniqueConstraint(columnNames = "orderNumber")})
 public class Order implements Serializable{
 	
 	private Integer id;

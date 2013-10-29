@@ -13,11 +13,17 @@ import com.guangbo.chen.jpa.Product;
 
 /**
  * Session Bean implementation class CartBean
+ * this class manages customer orders
  */
 @Stateful(mappedName = "ejb/cartBean")
 public class CartBean implements CartBeanRemote, CartBeanLocal {
 	private ArrayList<Orderline> orderList = new ArrayList<Orderline>();
 	
+	/**
+	 * this method add customer ordering product to the cart
+	 * @param p, product object
+	 * @param quantity, int quantity
+	 */
 	@Override
 	public void addToCart(Product p, int quantity) {
 		
@@ -51,11 +57,21 @@ public class CartBean implements CartBeanRemote, CartBeanLocal {
 		
 	}
 
+	
+	/**
+	 * this method returns a list of orderlines
+	 * @return orderList, list of orderlines
+	 */
 	@Override
 	public Collection<Orderline> getOrderList() {
 		return orderList;
 	}
 
+	/**
+	 * this method update orderline's quantity via product id
+	 * @param quantity, int quantity
+	 * @param productId, int product id
+	 */
 	@Override
 	public void updateOrder(int quantity, int productId) {
 		if(orderList != null || !orderList.isEmpty())
@@ -75,6 +91,10 @@ public class CartBean implements CartBeanRemote, CartBeanLocal {
 		}
 	}
 
+	/**
+	 * this method returns the grandTotal price of the oder
+	 * @return grandTotal, double grandTotal
+	 */
 	@Override
 	public double getGrandTotal() {
 		double grandTotal = 0.00;
@@ -89,6 +109,11 @@ public class CartBean implements CartBeanRemote, CartBeanLocal {
 		return grandTotal;
 	}
 
+	
+	/**
+	 * this method deleted specific orderlines upon the product id
+	 * @param productId, int product id
+	 */
 	@Override
 	public void deleteOrder(int productId) {
 		for (Iterator<Orderline> it = orderList.iterator(); it.hasNext(); )

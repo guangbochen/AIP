@@ -1,19 +1,22 @@
 package com.guangbo.chen.order.action;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-
 import com.guangbo.chen.controller.Action;
 import com.guangbo.chen.controller.Dispatcher;
 import com.guangbo.chen.ejb.CartBeanRemote;
-import com.guangbo.chen.jpa.Orderline;
 
+/**
+ * this class handles HTTP request from the order page
+ * @author guangbo
+ */
 public class PurchaseOrderAction implements Action{
 	private CartBeanRemote cartBean;
 	
+	/**
+	 * this method forwarding the user to the purchasing page to complete the order purchase
+	 * @param request, HttpServreletRequest
+	 * @return Dispatcher, Dispatcher forwarding to the purchase page
+	 */
 	@Override
 	public Dispatcher execute(HttpServletRequest request) {
 		

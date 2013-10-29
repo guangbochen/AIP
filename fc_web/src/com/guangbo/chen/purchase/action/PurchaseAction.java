@@ -6,8 +6,17 @@ import com.guangbo.chen.controller.Action;
 import com.guangbo.chen.controller.Dispatcher;
 import com.guangbo.chen.jpa.Order;
 
+/**
+ * this class handles HTTP request from the purchase page
+ * @author guangbo
+ */
 public class PurchaseAction implements Action {
 
+	/**
+	 * this method validates the customer order details and handle the pruchase actions
+	 * @param request, HttpServreletRequest
+	 * @return Dispatcher, Dispatcher forwarding to the confirmPurchase check page
+	 */
 	@Override
 	public Dispatcher execute(HttpServletRequest request) {
 		boolean validation = true;

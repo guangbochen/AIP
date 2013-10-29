@@ -7,18 +7,33 @@ import com.guangbo.chen.controller.Dispatcher;
 import com.guangbo.chen.ejb.OrderBeanRemote;
 import com.guangbo.chen.jpa.Order;
 
+/**
+ * this class handles HTTP request from the admin page
+ * @author guangbo
+ */
 public class CheckOutstandingOrderAction implements Action {
 	private OrderBeanRemote oBean;
 	private String orderNumber;
 	
+	/**
+	 * constructor to inject the order EJB bean
+	 * @param oBean, Order EJB bean
+	 */
 	public CheckOutstandingOrderAction(OrderBeanRemote oBean) {
 		this.oBean = oBean;
 	}
 
+	/**
+	 * this method forwarding a outstanding orders to the admin check page
+	 * @param request, HttpServreletRequest
+	 * @return Dispatcher, Dispatcher forwarding to the admin check page
+	 */
 	@Override
 	public Dispatcher execute(HttpServletRequest request) {
 		try{
 			orderNumber = request.getParameter("nu");
+			
+			//validate order number
 			if(orderNumber.equals(""))
 			{
 				request.setAttribute("isempty", " Empty");

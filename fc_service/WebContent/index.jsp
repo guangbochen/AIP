@@ -26,6 +26,5 @@ if(!sess.isNew())
 		Password : <input type="password" name="password" placeholder=" Enter password" value="<%=password %>"><br>
 		<input type="submit" value="Submit">
 	</form>
-	 The remote user is <%= request.getRemoteUser() %>
 </body>
 </html>

@@ -7,6 +7,10 @@ import com.guangbo.chen.controller.Dispatcher;
 import com.guangbo.chen.ejb.ProductBeanRemote;
 import com.guangbo.chen.jpa.Product;
 
+/**
+ * this class handles HTTP request from the products page
+ * @author guangbo
+ */
 public class ProductsAction implements Action{
 	private ProductBeanRemote pdao;
 	private final static int recordsPerPage = 8;
@@ -15,10 +19,19 @@ public class ProductsAction implements Action{
 	private int noOfPages;
 	private ArrayList<Product> productList;
 	
+	/**
+	 * constructor to inject the product EJB bean
+	 * @param oBean, Order EJB bean
+	 */
 	public ProductsAction(ProductBeanRemote pdao) {
 		this.pdao = pdao;
 	}
 
+	/**
+	 * this method returns a list of products in pagination
+	 * @param request, HttpServreletRequest
+	 * @return Dispatcher, Dispatcher forwarding to the products page
+	 */
 	@Override
 	public Dispatcher execute(HttpServletRequest request) {
 		//initialize variables

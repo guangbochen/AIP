@@ -5,6 +5,10 @@ import javax.ejb.Remote;
 import com.guangbo.chen.jpa.Order;
 import com.guangbo.chen.jpa.Orderline;
 
+/**
+ * this is remote interface for Order EJB bean
+ * @author guangbo
+ */
 @Remote
 public interface OrderBeanRemote {
 	

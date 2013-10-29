@@ -4,6 +4,10 @@ import java.util.List;
 import com.guangbo.chen.jpa.Product;
 
 
+/**
+ * this is Product JPA implementation interface 
+ * @author guangbo
+ */
 public interface ProductJpaDAO {
 
 	//Basic searching facets

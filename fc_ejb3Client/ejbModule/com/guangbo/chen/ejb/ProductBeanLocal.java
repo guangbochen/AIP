@@ -7,8 +7,13 @@ import javax.persistence.EntityManager;
 
 import com.guangbo.chen.jpa.Product;
 
+/**
+ * this is local interface for Product EJB bean
+ * @author guangbo
+ */
 @Local
 public interface ProductBeanLocal {
+	
 	//searching products
 	public List<Product> findAll();
 	public List<Product> findAllByPagination(int offset, int noOfRecords);

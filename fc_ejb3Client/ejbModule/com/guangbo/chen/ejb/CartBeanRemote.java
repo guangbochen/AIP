@@ -1,11 +1,14 @@
 package com.guangbo.chen.ejb;
 
 import java.util.Collection;
-import java.util.List;
 import javax.ejb.Remote;
 import com.guangbo.chen.jpa.Orderline;
 import com.guangbo.chen.jpa.Product;
 
+/**
+ * this is remote interface of CartBean EJB bean
+ * @author guangbo
+ */
 @Remote
 public interface CartBeanRemote {
 	

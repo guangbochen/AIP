@@ -11,6 +11,7 @@ import com.guangbo.chen.jpa.Orderline;
 
 /**
  * Session Bean implementation class OrderEjbDao
+ * this class manages the the CRUD methods that corresponds to the orders
  */
 public class OrderJpaImpl implements OrderJpaDAO{
 	private EntityManager em;

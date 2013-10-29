@@ -7,23 +7,24 @@ import com.guangbo.chen.jpa.Product;
 
 /**
  * Session Bean implementation class ProductEjbDao
+ * this class manages the searching methods that corresponds to the products
  */
 public class ProductJpaImple implements ProductJpaDAO {
 	private EntityManager em;
 
 	/**
 	 *  special ejb3 constructor to set the entity manager.
+	 *  @param EntityManager, container entity manager
 	 */
     public ProductJpaImple(EntityManager em) 
     {
     	this.em = em;
     }
-    
-    public void setEntityManager(EntityManager em)
-    {
-    	this.em = em;
-    }
 
+    /**
+     * this method returns a list of of all the products
+     * @return products, list of products
+     */
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Product> findAll() {
@@ -40,6 +41,10 @@ public class ProductJpaImple implements ProductJpaDAO {
 		return products;
 	}
 
+    /**
+     * this method returns a list of products via pagination
+     * @return products, list of products
+     */
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Product> findAllByPagination(int offset, int noOfRecords) {
@@ -59,6 +64,10 @@ public class ProductJpaImple implements ProductJpaDAO {
 		return products;
 	}
 
+    /**
+     * this method returns a list of products via category
+     * @return products, list of products
+     */
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Product> findAllByCategory(String category) {
@@ -77,6 +86,10 @@ public class ProductJpaImple implements ProductJpaDAO {
 		return products;
 	}
 
+    /**
+     * this method returns a list of products via category in pagination
+     * @return products, list of products
+     */
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Product> findAllCategoryByPagination(String category, int offset, int noOfRecords) {

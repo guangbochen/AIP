@@ -11,18 +11,33 @@ import com.guangbo.chen.ejb.OrderBeanRemote;
 import com.guangbo.chen.jpa.Order;
 import com.guangbo.chen.jpa.Orderline;
 
+/**
+ * this class handles HTTP request from the process page
+ * @author guangbo
+ */
 public class ProcessPurchaseAction implements Action{
 	private CartBeanRemote cartBean;
 	private OrderBeanRemote obean;
 	private Order order;
 
+	/**
+	 * constructor to inject the order EJB bean
+	 * @param oBean, Order EJB bean
+	 */
 	public ProcessPurchaseAction(OrderBeanRemote obean) {
 		this.obean = obean;
 	}
 
+	/**
+	 * this method handle order processing action if user confirmed to purchase the order
+	 * @param request, HttpServreletRequest
+	 * @return Dispatcher, Dispatcher forwarding to the PurchaseNotice page if is done,
+	 * otherwise redirect to the error page
+	 */
 	@Override
 	public Dispatcher execute(HttpServletRequest request) {
 		
+		//find the EJB cart session bean
 		cartBean = (CartBeanRemote) request.getSession().getAttribute("cartBean");
 		order= (Order) request.getSession().getAttribute("order");
 		if(cartBean != null)
@@ -43,7 +58,7 @@ public class ProcessPurchaseAction implements Action{
 		}
 		else
 		{
-			return new Dispatcher.Redirect("index");
+			return new Dispatcher.Redirect("404.jsp");
 		}
 		
 	}

@@ -4,6 +4,11 @@ import java.util.List;
 import com.guangbo.chen.jpa.Order;
 import com.guangbo.chen.jpa.Orderline;
 
+
+/**
+ * this is Order JPA implementation interface 
+ * @author guangbo
+ */
 public interface OrderJpaDAO {
 
 	//Basic CRUD for OrderEjbDao

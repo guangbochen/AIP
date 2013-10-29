@@ -13,12 +13,15 @@ import com.guangbo.chen.index.action.IndexAction;
 
 /**
  * Servlet implementation class IndexServlet
- * this class handles index request and forwards relevant responses
+ * this class is controller that manages all the request from index pages
  */
 public class IndexController extends HttpServlet 
 {
 	private Map<String,Action> actions;
 	
+	/**
+	 * PostConstructor to inject the required EJB bean and initialize the action maps
+	 */
 	@PostConstruct
 	public void init() {
 		actions = new HashMap<String,Action>();
@@ -27,13 +30,20 @@ public class IndexController extends HttpServlet
 		actions.put(null, actions.get("index"));
 	}
 	
+	/**
+	 * this method calls the doPost method
+	 * @param request, HttpServletRequest
+	 * @param response, HttpServletResponse
+	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
 	{
 		doPost(request, response);
 	}
 
 	/**
-	 * this method handles index post requests
+	 * this method handles all the request from index page and forwarding to a specific page
+	 * @param request, HttpServletRequest
+	 * @param response, HttpServletResponse
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
 	{

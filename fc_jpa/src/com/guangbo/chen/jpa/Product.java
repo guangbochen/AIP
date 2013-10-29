@@ -10,6 +10,10 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
+/**
+ * this class is java Entity bean that is corresponds to the orderlines table
+ * @author guangbo
+ */
 @NamedQueries({
 	@NamedQuery(name = "product.findAll", query = "Select p From Product p Order By p.category desc"),
 	@NamedQuery(name = "product.findAllCategory", query = "Select p.category From Product p "
@@ -26,11 +30,22 @@ public class Product implements Serializable{
 	private String description;
 	private double price;
 	
+	/**
+	 * default constructor
+	 */
 	public Product() {
 		super();
 	}
 	
 	
+	/**
+	 * constructor with parameters
+	 * @param id, int id
+	 * @param category, string category
+	 * @param code, string code
+	 * @param description, string description
+	 * @param price, double price
+	 */
 	public Product(int id, String category, String code, String description, double price) {
 		super();
 		this.id = id;
