@@ -1,10 +1,14 @@
 package com.guangbo.chen.dao;
 
-import java.util.ArrayList;
 import java.util.List;
 import com.guangbo.chen.jpa.Order;
 import com.guangbo.chen.jpa.Orderline;
 
+
+/**
+ * this is Order JPA implementation interface 
+ * @author guangbo
+ */
 public interface OrderJpaDAO {
 
 	//Basic CRUD for OrderEjbDao
@@ -20,4 +24,9 @@ public interface OrderJpaDAO {
 	public List<Order> findOutstandingOrders();
 	public Order findOrderByOrderNumber(String orderNumber);
 	public void updateOrderStatus(String orderNumber, String status);
+	
+	
+	//supplier searching and update method
+	public List<Order> findPaidOrders();
+	public boolean updatePaidOrder(String orderNumber, String status);
 }

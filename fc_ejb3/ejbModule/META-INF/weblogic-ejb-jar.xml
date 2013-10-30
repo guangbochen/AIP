@@ -7,4 +7,16 @@
 	http://xmlns.oracle.com/weblogic/weblogic-ejb-jar 
 	http://xmlns.oracle.com/weblogic/weblogic-ejb-jar/1.2/weblogic-ejb-jar.xsd">
     <!--weblogic-version:10.3.6-->
+    
+    <!-- EJB authentication for fc order-->
+    <wls:security-role-assignment>
+	    <wls:role-name>orders</wls:role-name>
+	    <wls:principal-name>fc_Admin</wls:principal-name>
+	</wls:security-role-assignment>
+	
+    <!-- EJB authentication for fc supplier-->
+    <wls:security-role-assignment>
+	    <wls:role-name>supplier</wls:role-name>
+	    <wls:principal-name>fc_supplier</wls:principal-name>
+	</wls:security-role-assignment>
 </wls:weblogic-ejb-jar>

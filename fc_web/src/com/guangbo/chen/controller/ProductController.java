@@ -18,13 +18,19 @@ import com.guangbo.chen.product.action.AddToCartAction;
 import com.guangbo.chen.product.action.CategoryAction;
 import com.guangbo.chen.product.action.ProductsAction;
 
-
+/**
+ * Servlet implementation class ProductController
+ * this class is controller that manages all the request from products page
+ */
 public class ProductController extends HttpServlet{
 	@EJB (name="productEjb",mappedName="ejb/product")
 	private ProductBeanRemote pdao;
 	private CartBeanRemote cartBean;
 	private Map<String,Action> actions;
 	
+	/**
+	 * PostConstructor to inject the required EJB bean and initialize the action maps
+	 */
 	@PostConstruct
 	public void Init() {
 		actions = new HashMap<String,Action>();
@@ -35,12 +41,19 @@ public class ProductController extends HttpServlet{
 		actions.put(null, actions.get("products"));
 	}
 	
+	/**
+	 * this method calls the doPost method
+	 * @param request, HttpServletRequest
+	 * @param response, HttpServletResponse
+	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doPost(request, response);
 	}
 
 	/**
-	 * this method handles product post requests
+	 * this method handles all the request from products page and manages its action
+	 * @param request, HttpServletRequest
+	 * @param response, HttpServletResponse
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try
@@ -57,6 +70,11 @@ public class ProductController extends HttpServlet{
 		}
 	}
 	
+	/**
+	 * this method use JNDI lookup to find the Stateful cart session bean
+	 * and saves into http session for later use purpose
+	 * @param request, HttpServletRequest
+	 */
 	private void initCartBean(HttpServletRequest request)
 	{
 		cartBean = (CartBeanRemote) request.getSession().getAttribute("cartBean");

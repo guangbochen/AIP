@@ -5,6 +5,11 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+
+/**
+ * this is abstract class that manages the dispatcher action via its derived class
+ * @author guangbo
+ */
 public abstract class Dispatcher {
 	public abstract void dispatch(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException;
 
@@ -28,7 +33,7 @@ public abstract class Dispatcher {
 	/**
 	 * This dispatcher redirects to a given url.
 	 */
-	public class Redirect extends Dispatcher {
+	public static class Redirect extends Dispatcher {
 		private String url;
 
 		public Redirect(String url) {

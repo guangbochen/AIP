@@ -11,6 +11,7 @@ import com.guangbo.chen.jpa.Orderline;
 
 /**
  * Session Bean implementation class OrderEjbDao
+ * this class manages the the CRUD methods that corresponds to the orders
  */
 public class OrderJpaImpl implements OrderJpaDAO{
 	private EntityManager em;
@@ -18,20 +19,20 @@ public class OrderJpaImpl implements OrderJpaDAO{
 	private final static String prefixOfUniqueId = "guchen";
 	private static String orderNumber = null;
 
-
 	/**
 	 *  special ejb3 constructor to set the entity manager.
+	 *  @param EntityManager, container entity manager
 	 */
     public OrderJpaImpl(EntityManager em) 
     {
     	this.em = em;
     }
     
-    public void setEntityManager(EntityManager em)
-    {
-    	this.em = em;
-    }
-    
+    /**
+     * this method persist order and related orderLines into the database
+     * @param orderlines, list of order lines
+     * @param order, order object
+     */
 	@Override
 	public void addOrder(List<Orderline> orderlines, Order order) {
 		try
@@ -53,7 +54,12 @@ public class OrderJpaImpl implements OrderJpaDAO{
 		}
 	}
 
-
+	/**
+	 * this method finds a specific order by order number and surname
+	 * @param orderNum, string order number
+	 * @param surname, string surname
+	 * @return order
+	 */
 	@Override
 	public Order findOrderByOrderNumAndSurname(String orderNum, String surname) {
 		Order order = new Order();
@@ -71,6 +77,7 @@ public class OrderJpaImpl implements OrderJpaDAO{
 
 	/**
 	 * this method returns auto generated unique order number
+	 * @return order number, String order number
 	 */
 	@Override
 	public String getUniqueOrderNum() {
@@ -81,7 +88,6 @@ public class OrderJpaImpl implements OrderJpaDAO{
 	 * this method generates unique order number for each order
 	 * @return order number
 	 */
-	
 	private String generateOrderNum()
 	{
 		int orderId = 0;
@@ -123,6 +129,11 @@ public class OrderJpaImpl implements OrderJpaDAO{
 		return grandTotal;
 	}
 
+	
+	/**
+	 * this method returns a list of outstanding order with ordered and paid status
+	 * @return orders, list of order
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Order> findOutstandingOrders() {
@@ -138,7 +149,12 @@ public class OrderJpaImpl implements OrderJpaDAO{
 		}
 		return orders;
 	}
-
+	
+	
+	/**
+	 * this method returns an order by unique order number
+	 * @return order
+	 */
 	@Override
 	public Order findOrderByOrderNumber(String orderNumber) {
 		Order order = new Order();
@@ -154,6 +170,11 @@ public class OrderJpaImpl implements OrderJpaDAO{
 		return order;
 	}
 
+	/**
+	 * this method update order status via order number and order status
+	 * @param orderNumber, string order number
+	 * @param status, string order status
+	 */
 	@Override
 	public void updateOrderStatus(String orderNumber, String status) {
 		try {
@@ -166,5 +187,54 @@ public class OrderJpaImpl implements OrderJpaDAO{
 		catch(Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	
+	/**
+	 * this method returns a list of orders with order status "PAID"
+	 * @return orders, list of order
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Order> findPaidOrders() {
+		List<Order> orders = new ArrayList<Order>();
+		try
+		{
+			orders = em.createNamedQuery("order.findPaidOrders")
+					.setParameter(1, "PAID")
+					.getResultList();
+			
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		return orders;
+	}
+	
+	/**
+	 * this method update order status via order number and order status
+	 * @param orderNumber, string order number
+	 * @param status, string order status
+	 * @return boolean, result of updating order
+	 */
+	@Override
+	public boolean updatePaidOrder(String orderNumber, String status) {
+		
+		try {
+			//if status is not set as "SENT", terminate updating and return false
+			if(!status.equals("SENT") || orderNumber.equals("")) return false;
+			
+			//update order to status "SENT" according to order number
+			Order order = (Order) em.createNamedQuery("order.findOrderByOrderNum")
+					.setParameter(1, orderNumber)
+					.getSingleResult();
+			order.setStatus(status);
+			em.merge(order);
+			return true;
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		return false;
 	}
 }

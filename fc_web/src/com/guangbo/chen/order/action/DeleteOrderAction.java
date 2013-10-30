@@ -1,20 +1,22 @@
 package com.guangbo.chen.order.action;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-
 import com.guangbo.chen.controller.Action;
 import com.guangbo.chen.controller.Dispatcher;
 import com.guangbo.chen.ejb.CartBeanRemote;
-import com.guangbo.chen.ejb.OrderBeanRemote;
-import com.guangbo.chen.jpa.Orderline;
 
+/**
+ * this class handles HTTP request from the order page
+ * @author guangbo
+ */
 public class DeleteOrderAction implements Action{
 	private CartBeanRemote cartBean;
 	
+	/**
+	 * this method delete a specific orderlines that belongs to the customer via product id
+	 * @param request, HttpServreletRequest
+	 * @return Dispatcher, Dispatcher forwarding to the orders page
+	 */
 	@Override
 	public Dispatcher execute(HttpServletRequest request) {
 		

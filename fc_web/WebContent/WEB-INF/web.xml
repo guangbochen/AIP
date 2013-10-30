@@ -4,6 +4,34 @@
   <welcome-file-list>
     <welcome-file>index</welcome-file>
   </welcome-file-list>
+  
+  <!-- Admin authentication -->
+  <login-config>
+    <auth-method>BASIC</auth-method>
+    <realm-name>myrealm</realm-name>
+  </login-config>
+  
+  <security-constraint>
+    <web-resource-collection>
+      <web-resource-name>fc_admin resource</web-resource-name>
+      <url-pattern>/admin</url-pattern>
+    </web-resource-collection>
+
+    <auth-constraint>
+      <description>Only fc admin can access /admin url pattern </description>
+      <role-name>orders</role-name>
+    </auth-constraint>
+    
+    <user-data-constraint>
+	  <transport-guarantee>CONFIDENTIAL</transport-guarantee>
+  	</user-data-constraint>
+  </security-constraint>
+
+  <security-role>
+    <description>fc_sportsWare admin user</description>
+    <role-name>orders</role-name>
+  </security-role>
+  
   <servlet>
     <description></description>
     <display-name>IndexController</display-name>
@@ -58,7 +86,7 @@
     <description></description>
     <display-name>AdminController</display-name>
     <servlet-name>AdminController</servlet-name>
-    <servlet-class>com.guangbo.chen.admin.controller.AdminController</servlet-class>
+    <servlet-class>com.guangbo.chen.controller.AdminController</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>AdminController</servlet-name>

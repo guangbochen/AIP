@@ -15,6 +15,10 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+/**
+ * this class is java Entity bean that is corresponds to the orderlines table
+ * @author guangbo
+ */
 @Entity
 @Table(name="orderlines")
 public class Orderline implements Serializable {

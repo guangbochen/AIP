@@ -22,7 +22,7 @@
     	<h3>Updating Order Notice:</h3> <br>
 	
     	<div class="alert alert-success">
- 			<h3>${updateSuccess }<a class="btn btn-default" href="admin"> Close it !</a></h3>
+ 			<h3>${updateSuccess }<a class="btn btn-primary" href="admin"> Close it !</a></h3>
     	</div>
     	
 	</div>

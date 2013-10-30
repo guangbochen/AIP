@@ -8,12 +8,18 @@ import com.guangbo.chen.controller.Dispatcher;
 import com.guangbo.chen.ejb.CartBeanRemote;
 import com.guangbo.chen.jpa.Product;
 
+/**
+ * this class handles HTTP request from the products page
+ * @author guangbo
+ */
 public class AddToCartAction implements Action {
 	private CartBeanRemote cartBean;
 	
-	public AddToCartAction() {
-	}
-
+	/**
+	 * this method add customer orderlines to the shopping cart
+	 * @param request, HttpServreletRequest
+	 * @return Dispatcher, Dispatcher forwarding to the orders page
+	 */
 	@Override
 	public Dispatcher execute(HttpServletRequest request) {
 		

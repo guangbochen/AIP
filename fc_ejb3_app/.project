@@ -7,6 +7,7 @@
 		<project>fc_ejb3Client</project>
 		<project>fc_web</project>
 		<project>fc_jpa</project>
+		<project>fc_service</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
