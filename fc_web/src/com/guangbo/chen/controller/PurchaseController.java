@@ -19,10 +19,7 @@ import com.guangbo.chen.purchase.action.PurchaseAction;
  * this class is controller that manages all the action that is about purchase the order
  */
 public class PurchaseController extends HttpServlet {
-	@EJB(name = "OrderEjb", mappedName = "ejb/order")
-	private OrderBeanRemote obean;
 	private Map<String,Action> actions;
-	
 	
 	/**
 	 * PostConstructor to inject the required EJB bean and initialize the action maps
@@ -32,7 +29,7 @@ public class PurchaseController extends HttpServlet {
 		actions = new HashMap<String,Action>();
 		actions.put("index", new IndexAction());
 		actions.put("purchase", new PurchaseAction());
-		actions.put("process", new ProcessPurchaseAction(obean));
+		actions.put("process", new ProcessPurchaseAction());
 		//set default action to index page
 		actions.put(null, actions.get("index"));
     }

@@ -6,6 +6,8 @@ import javax.annotation.PostConstruct;
 import javax.annotation.security.DeclareRoles;
 import javax.annotation.security.RolesAllowed;
 import javax.ejb.Stateless;
+import javax.ejb.TransactionAttribute;
+import javax.ejb.TransactionAttributeType;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -20,6 +22,7 @@ import com.guangbo.chen.jpa.Orderline;
  */
 @Stateless(name = "OrderEjb", mappedName = "ejb/order")
 @DeclareRoles({"orders","supplier"})
+@TransactionAttribute(TransactionAttributeType.REQUIRED)
 public class OrderBean implements OrderBeanRemote, OrderBeanLocal {
 	@PersistenceContext
 	private EntityManager em;
@@ -34,15 +37,6 @@ public class OrderBean implements OrderBeanRemote, OrderBeanLocal {
 	{
 		odao = new OrderJpaImpl(em);
 	}
-	
-	/**
-	 * this method add customer orders to the database
-	 */
-	@Override
-	public void addOrder(List<Orderline> orderlines, Order order) {
-		odao.addOrder(orderlines, order);
-	}
-
 
 	/**
 	 * this method find specific order via order number and surname
@@ -54,23 +48,15 @@ public class OrderBean implements OrderBeanRemote, OrderBeanLocal {
 	public Order findOrderByOrderNumAndSurname(String orderNum, String surname) {
 		return odao.findOrderByOrderNumAndSurname(orderNum, surname);
 	}
+
 	
-
-	/**
-	 * this method returns auto generated unique order number
-	 * @return String unique order number
-	 */
-	@Override
-	public String getUniqueOrderNum() {
-		return odao.getUniqueOrderNum();
-	}
-
 	/**
 	 * this method calculates the grand total price of the order list
 	 * @param orderList, Arraylist of orderline
 	 * @return double grandTotal
 	 */
 	@Override
+	@TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
 	public double getGrandTotal(List<Orderline> orderList) {
 		return odao.getGrandTotal(orderList);
 	}
@@ -105,6 +91,7 @@ public class OrderBean implements OrderBeanRemote, OrderBeanLocal {
 	 */
 	@Override
 	@RolesAllowed("orders")
+	@TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
 	public void updateOrderStatus(String orderNumber, String status) {
 		odao.updateOrderStatus(orderNumber, status);
 	}
@@ -129,6 +116,7 @@ public class OrderBean implements OrderBeanRemote, OrderBeanLocal {
 	 */
 	@Override
 	@RolesAllowed("supplier")
+	@TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
 	public boolean updatePaidOrder(String orderNumber, String status) {
 		return odao.updatePaidOrder(orderNumber, status);
 	}

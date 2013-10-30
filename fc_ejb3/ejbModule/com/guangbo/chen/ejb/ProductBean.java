@@ -4,11 +4,10 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.Stateless;
+import javax.ejb.TransactionAttribute;
+import javax.ejb.TransactionAttributeType;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-
-import org.hibernate.service.spi.InjectService;
-
 import com.guangbo.chen.dao.ProductJpaDAO;
 import com.guangbo.chen.dao.ProductJpaImple;
 import com.guangbo.chen.jpa.Product;
@@ -17,6 +16,7 @@ import com.guangbo.chen.jpa.Product;
  * Session Bean implementation class ProductEjbDao
  * this class manages the searching methods of products
  */
+@TransactionAttribute(TransactionAttributeType.SUPPORTS)
 @Stateless(name = "productEjb", mappedName = "ejb/product")
 public class ProductBean implements ProductBeanRemote, ProductBeanLocal {
 	@PersistenceContext

@@ -5,9 +5,20 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.ejb.Stateful;
+import javax.ejb.TransactionAttribute;
+import javax.ejb.TransactionAttributeType;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.PersistenceContextType;
 
+import com.guangbo.chen.dao.CartDAO;
+import com.guangbo.chen.dao.CartDAOImpl;
+import com.guangbo.chen.dao.OrderJpaDAO;
+import com.guangbo.chen.dao.OrderJpaImpl;
+import com.guangbo.chen.jpa.Order;
 import com.guangbo.chen.jpa.Orderline;
 import com.guangbo.chen.jpa.Product;
 
@@ -16,8 +27,43 @@ import com.guangbo.chen.jpa.Product;
  * this class manages customer orders
  */
 @Stateful(mappedName = "ejb/cartBean")
+@TransactionAttribute(TransactionAttributeType.REQUIRED)
 public class CartBean implements CartBeanRemote, CartBeanLocal {
-	private ArrayList<Orderline> orderList = new ArrayList<Orderline>();
+	@PersistenceContext(type=PersistenceContextType.EXTENDED)
+	private EntityManager em;
+	private OrderJpaDAO odao;
+	private CartDAO cart;
+	//private ArrayList<Orderline> orderList = new ArrayList<Orderline>();
+	
+	/**
+	 * postConstructor to initalise the entity manager 
+	 * before it has been created
+	 */
+	@PostConstruct
+	public void init()
+	{
+		odao = new OrderJpaImpl(em);
+		cart = new CartDAOImpl();
+	}
+	
+	/**
+	 * this method add customer orders to the database
+	 */
+	@Override
+	@TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
+	public void addOrder(List<Orderline> orderlines, Order order) {
+		odao.addOrder(orderlines, order);
+	}
+	
+	/**
+	 * this method returns auto generated unique order number
+	 * @return String unique order number
+	 */
+	@Override
+	public String getUniqueOrderNum() {
+		return odao.getUniqueOrderNum();
+	}
+	
 	
 	/**
 	 * this method add customer ordering product to the cart
@@ -26,35 +72,7 @@ public class CartBean implements CartBeanRemote, CartBeanLocal {
 	 */
 	@Override
 	public void addToCart(Product p, int quantity) {
-		
-		//initialize the bean if the cart session bean is empty
-		if(orderList == null || orderList.isEmpty())
-		{
-			Orderline ol = new Orderline(p,quantity,p.getPrice()*quantity);
-			orderList.add(ol);
-		}
-		else
-		{
-			Boolean newOrder = true;
-			for(Orderline ol : orderList)
-			{
-				//update product quantity and lineTotal if order is already exist
-				if(ol.getProduct().getId() == p.getId())
-				{
-					int totalQuantity = ol.getQuantity() + quantity;
-					ol.setQuantity(totalQuantity);
-					ol.setLineTotal(p.getPrice()*ol.getQuantity());
-					newOrder = false;
-					break;
-				}
-			}
-			if(newOrder)
-			{
-				Orderline ol = new Orderline(p,quantity,p.getPrice()*quantity);
-				orderList.add(ol);
-			}
-		}
-		
+		cart.addToCart(p, quantity);
 	}
 
 	
@@ -64,7 +82,7 @@ public class CartBean implements CartBeanRemote, CartBeanLocal {
 	 */
 	@Override
 	public Collection<Orderline> getOrderList() {
-		return orderList;
+		return cart.getOrderList();
 	}
 
 	/**
@@ -74,21 +92,7 @@ public class CartBean implements CartBeanRemote, CartBeanLocal {
 	 */
 	@Override
 	public void updateOrder(int quantity, int productId) {
-		if(orderList != null || !orderList.isEmpty())
-		{
-			for(Orderline ol : orderList)
-			{
-				//update product quantity via product id
-				if(ol.getProduct().getId() == productId)
-				{
-					//update lineTotal
-					ol.setQuantity(quantity);
-					double lineTotal = quantity*ol.getProduct().getPrice();
-					ol.setLineTotal(lineTotal);
-					break;
-				}
-			}
-		}
+		cart.updateOrder(quantity, productId);
 	}
 
 	/**
@@ -97,16 +101,7 @@ public class CartBean implements CartBeanRemote, CartBeanLocal {
 	 */
 	@Override
 	public double getGrandTotal() {
-		double grandTotal = 0.00;
-		if(orderList != null)
-		{
-			for(Orderline ol : orderList)
-			{
-				grandTotal += ol.getLineTotal();
-				grandTotal = Math.round(grandTotal*100.00)/100.00;
-			}
-		}
-		return grandTotal;
+		return cart.getGrandTotal();
 	}
 
 	
@@ -116,14 +111,7 @@ public class CartBean implements CartBeanRemote, CartBeanLocal {
 	 */
 	@Override
 	public void deleteOrder(int productId) {
-		for (Iterator<Orderline> it = orderList.iterator(); it.hasNext(); )
-		{
-			Orderline ol = (Orderline) it.next();  
-			if(ol.getProduct().getId() == productId )
-			{
-				it.remove();
-			}
-		}
+		cart.deleteOrder(productId);
 	}
 	
 

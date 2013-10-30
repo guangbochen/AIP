@@ -15,11 +15,7 @@ import com.guangbo.chen.jpa.Orderline;
 @Local
 public interface OrderBeanLocal {
 	
-	//Basic CRUD for OrderEjbDao
-	public void addOrder(List<Orderline> orderList, Order order);
-	
 	//searching and getting methods
-	public String getUniqueOrderNum();
 	public double getGrandTotal(List<Orderline> ols);
 	public Order findOrderByOrderNumAndSurname(String orderNum, String surname);
 	

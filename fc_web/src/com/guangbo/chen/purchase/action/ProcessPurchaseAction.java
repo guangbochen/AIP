@@ -17,16 +17,7 @@ import com.guangbo.chen.jpa.Orderline;
  */
 public class ProcessPurchaseAction implements Action{
 	private CartBeanRemote cartBean;
-	private OrderBeanRemote obean;
 	private Order order;
-
-	/**
-	 * constructor to inject the order EJB bean
-	 * @param oBean, Order EJB bean
-	 */
-	public ProcessPurchaseAction(OrderBeanRemote obean) {
-		this.obean = obean;
-	}
 
 	/**
 	 * this method handle order processing action if user confirmed to purchase the order
@@ -43,11 +34,12 @@ public class ProcessPurchaseAction implements Action{
 		if(cartBean != null)
 		{
 			List<Orderline> orderList = (List<Orderline>) cartBean.getOrderList();
-			obean.addOrder(orderList, order);
+			//obean.addOrder(orderList, order);
+			cartBean.addOrder(orderList, order);
 			
 			String name = order.getGivenName() + " " +order.getSurname();
 			//display ordering notice for customer
-        	request.setAttribute("orderNumber", obean.getUniqueOrderNum());
+        	request.setAttribute("orderNumber", cartBean.getUniqueOrderNum());
         	request.setAttribute("name", name);
         	
         	//once saved order into database successfully clean up the session beans
