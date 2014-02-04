@@ -9,5 +9,6 @@
 * Front end - JSTL + Bootstrap
 
 ---
-Demo Link
-http://sportsware.guangbochen.cloudbees.net/
+# Demo Link
+
+* http://sportsware.guangbochen.cloudbees.net  (Note: it may take few seconds to trigger the server)
